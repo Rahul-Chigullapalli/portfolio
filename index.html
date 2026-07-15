@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Rahul Chigullapalli</title>
-<meta name="description" content="Rahul Chigullapalli as a dataset: data engineering, data & business analytics, AI/agents, governance, and BI — query the career of a professional who ships across all of it.">
+<meta name="description" content="Rahul Chigullapalli as a dataset: data engineering, data & business analytics, AI/agents, governance, and BI. Query the career of a professional who ships across all of it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
@@ -93,13 +93,12 @@ button{font-family:inherit;cursor:pointer}
 .g-row{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:10px}
 .g-row .gl{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .g-row .gl b{color:var(--text);font-weight:600}
-.g-track{height:22px;background:var(--panel-2);border-radius:6px;position:relative}
-.g-bar{position:absolute;top:3px;bottom:3px;border-radius:5px;min-width:26px;
-  display:flex;align-items:center;padding:0 8px;font-family:'JetBrains Mono',monospace;
-  font-size:9.5px;color:#fff;font-weight:700;white-space:nowrap;overflow:hidden;
-  transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
-.in .g-bar{transform:scaleX(1)}
-@media(max-width:560px){.g-row{grid-template-columns:110px 1fr}.g-bar{font-size:0}}
+.g-track{min-height:26px;background:var(--panel-2);border-radius:6px;display:flex;align-items:center;
+  padding:4px;flex-wrap:wrap;gap:4px}
+.g-bar{border-radius:5px;display:inline-flex;align-items:center;padding:4px 10px;
+  font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#fff;font-weight:700;
+  white-space:nowrap;flex:none}
+@media(max-width:560px){.g-row{grid-template-columns:110px 1fr}}
 
 /* donut */
 .donut-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
@@ -204,7 +203,6 @@ footer .mono{font-size:11px;margin-top:10px}
 @media(prefers-reduced-motion:reduce){
   *{transition:none!important;animation:none!important}
   .reveal{opacity:1;transform:none}
-  .g-bar{transform:none}
   .fill{transition:none}
 }
 
@@ -280,18 +278,23 @@ footer .mono{font-size:11px;margin-top:10px}
 .cp-hd{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;padding:10px 0}
 .cp-hd button{background:none;border:none;color:var(--muted);font-size:15px;padding:2px 6px;border-radius:6px;cursor:pointer}
 .cp-hd button:hover{color:var(--text);background:var(--panel-2)}
-.cp-row{display:block;padding:9px 0;border-top:1px solid var(--line)}
+.cp-row{display:flex;align-items:center;justify-content:space-between;gap:10px;padding:9px 0}
+.cp-row+.cp-row{border-top:1px solid var(--line)}
 .cp-row .cp-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);
   text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
 .cp-row .cp-value{font-size:13.5px;color:var(--orange);font-weight:500}
-.cp-row:hover .cp-value{text-decoration:underline}
+.cp-row .cp-value:hover{text-decoration:underline}
+.cp-copy{background:var(--panel-2);border:1px solid var(--line);border-radius:7px;color:var(--muted);
+  font-size:11px;padding:6px 10px;flex:none;transition:.15s;font-family:'JetBrains Mono',monospace}
+.cp-copy:hover{color:var(--text);border-color:var(--orange)}
+.cp-copy.copied{color:var(--green);border-color:var(--green)}
 @media(max-width:480px){#contact-popup{right:10px;left:10px;width:auto;top:64px}}
 </style>
 </head>
 <body>
 
 <div id="top"><div class="wrap top-in">
-  <span class="brand">RAHUL<b>/AI & Data</b></span>
+  <span class="brand">RAHUL<b>/AI/Data</b></span>
   <span class="live"><i></i>live · refreshed just now</span>
   <div class="top-actions">
     <button class="tbtn" id="res-open">▤ Resume</button>
@@ -303,7 +306,7 @@ footer .mono{font-size:11px;margin-top:10px}
 <div class="wrap">
   <div id="hero">
     <h1>Career intelligence: <span>Rahul Chigullapalli</span></h1>
-    <p>Data engineer, analyst, and governance lead, rendered as what he builds — a governed dashboard. One profile spans data engineering, data &amp; business analytics, AI/agent systems, governance, and BI — every panel below is queryable, filterable, and traceable to source. Pick your lens below.</p>
+    <p>Data engineer, analyst, and governance lead, rendered as what he builds: a governed dashboard. One profile spans data engineering, data &amp; business analytics, AI/agent systems, governance, and BI. Every panel below is queryable, filterable, and traceable to source. Pick your lens below.</p>
     <div class="mono-sub">source: linkedin.com/in/rahul-chigullapalli · lineage: <b>verified</b> · grain: one row per fact</div>
   </div>
 
@@ -311,7 +314,7 @@ footer .mono{font-size:11px;margin-top:10px}
 
     <!-- capability lens -->
     <div class="panel c12 reveal" id="lens-panel">
-      <div class="ph"><h2>Pick your lens — one profile, six practices</h2><span class="src">SELECT DISTINCT capability FROM profile</span></div>
+      <div class="ph"><h2>Pick your lens: one profile, six practices</h2><span class="src">SELECT DISTINCT capability FROM profile</span></div>
       <div class="cap-grid" id="capgrid"></div>
     </div>
 
@@ -326,13 +329,12 @@ footer .mono{font-size:11px;margin-top:10px}
     <div class="panel c8 reveal" id="gantt-panel">
       <div class="ph"><h2>Career timeline</h2><span class="src">SELECT * FROM experience ORDER BY start_yr</span></div>
       <div class="gantt">
-        <div class="g-row"><span class="gl"><b>W.R. Berkley</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:83%;right:0;background:var(--blue)">Governance · DE · BI · Jul'25–now</div></div></div>
-        <div class="g-row"><span class="gl"><b>Technoid</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:68%;width:15%;background:var(--green)">−35% reporting turnaround</div></div></div>
-        <div class="g-row"><span class="gl"><b>Wolters Kluwer</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:58%;width:10%;background:var(--purple)">GenAI compliance bot</div></div></div>
-        <div class="g-row"><span class="gl"><b>Stevens Institute</b> · MS Info Systems</span><div class="g-track"><div class="g-bar" style="left:44%;width:15%;background:var(--pink)">Hoboken, NJ</div></div></div>
-        <div class="g-row"><span class="gl"><b>Innovatio Hub</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:0;width:44%;background:var(--orange)">IoT · governance · Hyderabad</div></div></div>
+        <div class="g-row"><span class="gl"><b>W.R. Berkley</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="background:var(--blue)">Governance · Infrastructure · Analytics</div></div></div>
+        <div class="g-row"><span class="gl"><b>Technoid</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="background:var(--green)">E-Commerce · −35% reporting turnaround</div></div></div>
+        <div class="g-row"><span class="gl"><b>Wolters Kluwer</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="background:var(--purple)">GenAI compliance chatbot</div></div></div>
+        <div class="g-row"><span class="gl"><b>Innovatio Hub</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="background:var(--orange)">IoT · governance · Robotics</div></div></div>
       </div>
-      <p class="src" style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">relative spans, Dec 2019–present — exact dates in Resume ▤</p>
+      <p class="src" style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">relative spans, Dec 2019–present (exact dates in Resume ▤)</p>
     </div>
 
     <!-- donut -->
@@ -369,12 +371,12 @@ footer .mono{font-size:11px;margin-top:10px}
       <div class="bar-row"><span class="bl">Reporting turnaround</span><div class="track"><div class="fill" data-w="35" data-max="40" style="background:var(--blue)"></div></div><span class="bv">−35%</span></div>
       <div class="bar-row"><span class="bl">Engagement (18 mo)</span><div class="track"><div class="fill" data-w="30" data-max="40" style="background:var(--purple)"></div></div><span class="bv">+30%</span></div>
       <div class="bar-row"><span class="bl">Client onboarding time (GenAI chatbot)</span><div class="track"><div class="fill" data-w="40" data-max="40" style="background:var(--orange)"></div></div><span class="bv">−40%</span></div>
-      <p style="font-size:11px;color:var(--muted);margin-top:10px" class="mono">bars scaled independently on the same axis — no cherry-picked scales, like any honest chart</p>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px" class="mono">bars scaled independently on the same axis, no cherry-picked scales, like any honest chart</p>
     </div>
 
     <!-- SQL console -->
     <div class="panel c12 reveal" id="sqlpanel">
-      <div class="ph"><h2>SQL console — query the candidate</h2><span class="src">read-only · SELECT only · runs in your browser</span></div>
+      <div class="ph"><h2>SQL console: query the candidate</h2><span class="src">read-only · SELECT only · runs in your browser</span></div>
       <div class="sql-box">
         <div class="sql-q">
           <button class="q-chip active" data-q="exp">experience</button>
@@ -386,7 +388,7 @@ footer .mono{font-size:11px;margin-top:10px}
           <button class="q-chip" data-q="contact">contact</button>
         </div>
         <textarea class="sql-input" id="sqlcode" spellcheck="false"></textarea>
-        <div class="sql-hint">tables: <b>experience · skills · projects · certifications · education · contact · why_hire_rahul</b> — this really executes, try editing it</div>
+        <div class="sql-hint">tables: <b>experience · skills · projects · certifications · education · contact · why_hire_rahul</b> (this really executes, try editing it)</div>
         <div class="run-row"><button class="run" id="runbtn">▶ RUN</button><span class="exec-meta" id="execmeta"></span></div>
         <div id="sqlerr"></div>
         <div class="res-scroll"><table class="res"><thead id="rhead"></thead><tbody id="rbody"></tbody></table></div>
@@ -401,12 +403,12 @@ footer .mono{font-size:11px;margin-top:10px}
         <thead><tr><th>Project</th><th>Industry</th><th>Capabilities</th><th>What it proves</th><th>Stack</th></tr></thead>
         <tbody id="projbody">
           <tr class="proj" data-d="insurance" data-cap="governance,data-engineering"><td><b>Enterprise CMDB &amp; asset governance</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">REST API integrations (ServiceNow CMDB, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into analytics-ready datasets; reconciliation &amp; dedup across 20M+ CIs</td><td class="dim">ServiceNow CMDB · Python · SQL · REST APIs</td></tr>
-          <tr class="proj" data-d="insurance" data-cap="governance,bi"><td><b>Power BI RLS &amp; AI cost dashboards</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">USERPRINCIPALNAME() DAX row-level security via an org-wide Azure AD group — zero-touch onboarding, published as a Power BI App; AI token-consumption dashboards over Azure Cost Management &amp; Cosmos DB</td><td class="dim">Power BI · DAX · Azure AD</td></tr>
+          <tr class="proj" data-d="insurance" data-cap="governance,bi"><td><b>Power BI RLS &amp; AI cost dashboards</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">USERPRINCIPALNAME() DAX row-level security via an org-wide Azure AD group, zero-touch onboarding, published as a Power BI App; AI token-consumption dashboards over Azure Cost Management &amp; Cosmos DB</td><td class="dim">Power BI · DAX · Azure AD</td></tr>
           <tr class="proj" data-d="insurance" data-cap="governance,business-analytics"><td><b>Application rationalization</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">Led lifecycle, usage, cost &amp; compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions</td><td class="dim">Power BI · SQL · Stakeholder analysis</td></tr>
-          <tr class="proj" data-d="saas" data-cap="ai-agents,governance,business-analytics"><td><b>GenAI compliance chatbot</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%</td><td class="dim">GenAI / LLM · RAG · Compliance</td></tr>
-          <tr class="proj" data-d="saas" data-cap="data-engineering,data-analytics"><td><b>Regulatory dataset restructuring</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Restructured a 700+ record regulatory licensing dataset with SQL &amp; Python — 40% faster search, 70+ hours of manual analysis saved</td><td class="dim">SQL · Python</td></tr>
+          <tr class="proj" data-d="saas" data-cap="ai-agents,governance,business-analytics"><td><b>GenAI compliance chatbot</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules, now supporting 80+ clients annually; cut client onboarding time 40%</td><td class="dim">GenAI / LLM · RAG · Compliance</td></tr>
+          <tr class="proj" data-d="saas" data-cap="data-engineering,data-analytics"><td><b>Regulatory dataset restructuring</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Restructured a 700+ record regulatory licensing dataset with SQL &amp; Python, 40% faster search, 70+ hours of manual analysis saved</td><td class="dim">SQL · Python</td></tr>
           <tr class="proj" data-d="finance" data-cap="data-engineering,bi"><td><b>Reporting automation</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Power Query/Power Automate workflows cut manual reporting effort 40% (10→6 hrs/week); SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%</td><td class="dim">Power Query · Power Automate · Power BI</td></tr>
-          <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>A/B testing &amp; engagement</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months</td><td class="dim">SQL · Power BI · A/B Testing</td></tr>
+          <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>A/B testing &amp; engagement</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Designed and analyzed A/B tests across marketing channels: +30% customer engagement over 18 months</td><td class="dim">SQL · Power BI · A/B Testing</td></tr>
           <tr class="proj" data-d="iot" data-cap="data-engineering,governance,data-analytics"><td><b>IoT telemetry &amp; data quality</b></td><td><span class="dtag" style="color:var(--orange);border:1px solid var(--orange)">iot</span></td><td></td><td class="dim">Metadata capture &amp; quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35% (~$15K/yr)</td><td class="dim">Tableau · Data quality frameworks</td></tr>
         </tbody>
       </table></div>
@@ -446,7 +448,7 @@ footer .mono{font-size:11px;margin-top:10px}
 <footer><div class="wrap">
   <b style="color:var(--text)">Rahul Chigullapalli</b> · Jersey City, NJ · open to relocation<br>
   <a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a> · (201) 423-5266 · <a href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">linkedin.com/in/rahul-chigullapalli</a>
-  <div class="mono">© 2026 · one HTML file · zero frameworks · every chart hand-rolled — because a governance guy shows his lineage</div>
+  <div class="mono">© 2026 · one HTML file · zero frameworks · every chart hand-rolled, because a governance guy shows his lineage</div>
 </div></footer>
 
 <div id="resume" role="dialog" aria-label="Resume">
@@ -476,15 +478,18 @@ footer .mono{font-size:11px;margin-top:10px}
 <!-- contact popup -->
 <div id="contact-popup" role="dialog" aria-label="Contact">
   <div class="cp-hd">Get in touch<button id="contact-close" aria-label="Close contact popup">✕</button></div>
-  <a class="cp-row" href="mailto:chigullapallirahul@gmail.com">
-    <span class="cp-label">Email</span><span class="cp-value">chigullapallirahul@gmail.com</span>
-  </a>
-  <a class="cp-row" href="tel:+12014235266">
-    <span class="cp-label">Phone</span><span class="cp-value">(201) 423-5266</span>
-  </a>
-  <a class="cp-row" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">
-    <span class="cp-label">LinkedIn</span><span class="cp-value">linkedin.com/in/rahul-chigullapalli</span>
-  </a>
+  <div class="cp-row">
+    <div><span class="cp-label">Email</span><a class="cp-value" href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a></div>
+    <button class="cp-copy" data-copy="chigullapallirahul@gmail.com" aria-label="Copy email">Copy</button>
+  </div>
+  <div class="cp-row">
+    <div><span class="cp-label">Phone</span><a class="cp-value" href="tel:+12014235266">(201) 423-5266</a></div>
+    <button class="cp-copy" data-copy="(201) 423-5266" aria-label="Copy phone number">Copy</button>
+  </div>
+  <div class="cp-row">
+    <div><span class="cp-label">LinkedIn</span><a class="cp-value" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">linkedin.com/in/rahul-chigullapalli</a></div>
+    <button class="cp-copy" data-copy="https://www.linkedin.com/in/rahul-chigullapalli/" aria-label="Copy LinkedIn URL">Copy</button>
+  </div>
 </div>
 
 <!-- ask-Rahul chatbot -->
@@ -533,17 +538,17 @@ $$('.reveal').forEach(el=>io.observe(el));
 /* capability lens data + rendering */
 const CAPS=[
   {k:'data-engineering',label:'Data Engineering',c:'var(--green)',
-    bullets:['REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) — 1.5TB+ into Snowflake/SQL Server','ETL/ELT pipeline design — Azure Data Factory, Databricks, dbt, Python/pandas','Reconciliation &amp; deduplication logic across 20M+ configuration items']},
+    bullets:['REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror): 1.5TB+ into Snowflake/SQL Server','ETL/ELT pipeline design: Azure Data Factory, Databricks, dbt, Python/pandas','Reconciliation &amp; deduplication logic across 20M+ configuration items']},
   {k:'data-analytics',label:'Data Analytics',c:'var(--blue)',
-    bullets:['SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT','A/B testing &amp; cohort analysis — +30% engagement over 18 months','IoT telemetry analysis — 300+ error patterns surfaced, 22% faster issue ID']},
+    bullets:['SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT','A/B testing &amp; cohort analysis: +30% engagement over 18 months','IoT telemetry analysis: 300+ error patterns surfaced, 22% faster issue ID']},
   {k:'ai-agents',label:'AI &amp; Agents',c:'var(--purple)',
-    bullets:['Designed RAG / knowledge-retrieval logic &amp; business rules for a GenAI compliance chatbot — 80+ clients','AI cost &amp; usage monitoring — token-consumption dashboards guiding infra spend','Working knowledge of Responsible AI, NIST AI RMF, EU AI Act; AWS Bedrock']},
+    bullets:['Designed RAG / knowledge-retrieval logic &amp; business rules for a GenAI compliance chatbot: 80+ clients','AI cost &amp; usage monitoring: token-consumption dashboards guiding infra spend','Working knowledge of Responsible AI, NIST AI RMF, EU AI Act; AWS Bedrock']},
   {k:'governance',label:'Governance',c:'var(--pink)',
-    bullets:['Enterprise asset governance model — ownership, lifecycle, data-quality KPIs across 20M+ CIs','Row-level security in Power BI via Azure AD groups — zero-touch, auditable access','Data lineage, metadata management, CDEs, PII classification, audit readiness']},
+    bullets:['Enterprise asset governance model: ownership, lifecycle, data-quality KPIs across 20M+ CIs','Row-level security in Power BI via Azure AD groups: zero-touch, auditable access','Data lineage, metadata management, CDEs, PII classification, audit readiness']},
   {k:'bi',label:'Business Intelligence',c:'var(--orange)',
-    bullets:['End-to-end Power BI: data modeling, DAX, Power Query, RLS, App-based distribution','Executive dashboards — 35% faster reporting turnaround, +30% decision accuracy','AI cost-intelligence dashboards over Azure Cost Management &amp; Cosmos DB']},
+    bullets:['End-to-end Power BI: data modeling, DAX, Power Query, RLS, App-based distribution','Executive dashboards: 35% faster reporting turnaround, +30% decision accuracy','AI cost-intelligence dashboards over Azure Cost Management &amp; Cosmos DB']},
   {k:'business-analytics',label:'Business Analytics',c:'var(--teal)',
-    bullets:['Led stakeholder discovery &amp; requirements (BRD/FRD, user stories) — 40% faster client onboarding','Application rationalization across lifecycle, usage, cost &amp; compliance with senior stakeholders','KPI development &amp; workshop facilitation turning requirements into shipped analytics']}
+    bullets:['Led stakeholder discovery &amp; requirements (BRD/FRD, user stories): 40% faster client onboarding','Application rationalization across lifecycle, usage, cost &amp; compliance with senior stakeholders','KPI development &amp; workshop facilitation turning requirements into shipped analytics']}
 ];
 const capgrid=$('#capgrid');
 CAPS.forEach(cp=>{
@@ -633,7 +638,7 @@ function applyFilters(){
 }
 applyFilters();
 
-/* ===== SQL console — a real, hand-rolled SELECT engine over real data ===== */
+/* ===== SQL console: a real, hand-rolled SELECT engine over real data ===== */
 const DB={
  experience:[
   {role:'Data Analyst',org:'W.R. Berkley (via Stratus)',location:'Jersey City, NJ',industry:'insurance',start_date:'2025-07-01',end_date:'present',highlight:'1.5TB+ data engineered, 20M+ CIs governed, RLS, AI cost dashboards'},
@@ -659,10 +664,10 @@ const DB={
   {name:'Enterprise CMDB & asset governance',industry:'insurance',capabilities:'governance,data-engineering',proves:'REST API integrations (ServiceNow CMDB, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into analytics-ready datasets; reconciliation & dedup across 20M+ CIs',stack:'ServiceNow CMDB, Python, SQL, REST APIs'},
   {name:'Power BI RLS & AI cost dashboards',industry:'insurance',capabilities:'governance,bi',proves:'USERPRINCIPALNAME() DAX row-level security via an org-wide Azure AD group; AI token-consumption dashboards over Azure Cost Management & Cosmos DB',stack:'Power BI, DAX, Azure AD'},
   {name:'Application rationalization',industry:'insurance',capabilities:'governance,business-analytics',proves:'Led lifecycle, usage, cost & compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions',stack:'Power BI, SQL, Stakeholder analysis'},
-  {name:'GenAI compliance chatbot',industry:'saas',capabilities:'ai-agents,governance,business-analytics',proves:'Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%',stack:'GenAI/LLM, RAG, Compliance'},
-  {name:'Regulatory dataset restructuring',industry:'saas',capabilities:'data-engineering,data-analytics',proves:'Restructured a 700+ record regulatory licensing dataset with SQL & Python — 40% faster search, 70+ hours of manual analysis saved',stack:'SQL, Python'},
+  {name:'GenAI compliance chatbot',industry:'saas',capabilities:'ai-agents,governance,business-analytics',proves:'Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules, now supporting 80+ clients annually; cut client onboarding time 40%',stack:'GenAI/LLM, RAG, Compliance'},
+  {name:'Regulatory dataset restructuring',industry:'saas',capabilities:'data-engineering,data-analytics',proves:'Restructured a 700+ record regulatory licensing dataset with SQL & Python, 40% faster search, 70+ hours of manual analysis saved',stack:'SQL, Python'},
   {name:'Reporting automation',industry:'finance',capabilities:'data-engineering,bi',proves:'Power Query/Power Automate workflows cut manual reporting effort 40%; SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%',stack:'Power Query, Power Automate, Power BI'},
-  {name:'A/B testing & engagement',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months',stack:'SQL, Power BI, A/B Testing'},
+  {name:'A/B testing & engagement',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'Designed and analyzed A/B tests across marketing channels: +30% customer engagement over 18 months',stack:'SQL, Power BI, A/B Testing'},
   {name:'IoT telemetry & data quality',industry:'iot',capabilities:'data-engineering,governance,data-analytics',proves:'Metadata capture & quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35%',stack:'Tableau, Data quality frameworks'}
  ],
  certifications:[
@@ -731,7 +736,7 @@ function runSQL(raw){
   const query=raw.trim().replace(/;\s*$/,'');
   if(!query)throw new Error('Empty query.');
   if(/^(insert|update|delete|drop|alter|create|truncate)\b/i.test(query))
-    throw new Error('This console is read-only (fitting, for a governance guy) — try a SELECT query.');
+    throw new Error('This console is read-only (fitting, for a governance guy). Try a SELECT query.');
   const m=query.match(/^SELECT\s+(.+?)\s+FROM\s+([a-zA-Z_]\w*)(?:\s+WHERE\s+(.+?))?(?:\s+ORDER\s+BY\s+(.+?))?(?:\s+LIMIT\s+(\d+))?$/is);
   if(!m)throw new Error('Only SELECT cols FROM table [WHERE ...] [ORDER BY ...] [LIMIT n] is supported.');
   const [,colsRaw,tableRaw,whereRaw,orderRaw,limitRaw]=m;
@@ -788,12 +793,12 @@ function execSQL(){
     $('#execmeta').className='exec-meta';
     $('#execmeta').textContent=`${rows.length} row${rows.length===1?'':'s'} · ${ms} ms · executed in your browser`;
   }catch(err){
-    // bad query — never leave the console empty; fall back to the current table's real default data
+    // bad query: never leave the console empty; fall back to the current table's real default data
     const fallback=runSQL(SQL_EXAMPLES[activeChip]);
     renderResults(fallback.head,fallback.rows);
     $('#execmeta').className='exec-meta err';
     $('#execmeta').textContent=`query failed · showing default ${activeChip==='exp'?'experience':activeChip} data instead`;
-    errEl.innerHTML=`<div class="sql-error">✕ ${err.message} — reverted to the default query below.</div>`;
+    errEl.innerHTML=`<div class="sql-error">✕ ${err.message} Reverted to the default query below.</div>`;
   }
 }
 $$('.q-chip').forEach(c=>c.addEventListener('click',()=>{setQ(c.dataset.q);execSQL();}));
@@ -825,6 +830,15 @@ document.addEventListener('click',e=>{
   }
 });
 addEventListener('keydown',e=>{if(e.key==='Escape')closeContact()});
+$$('.cp-copy').forEach(btn=>{
+  btn.addEventListener('click',async()=>{
+    try{await navigator.clipboard.writeText(btn.dataset.copy);}catch(e){return;}
+    const orig=btn.textContent;
+    btn.textContent='Copied';
+    btn.classList.add('copied');
+    setTimeout(()=>{btn.textContent=orig;btn.classList.remove('copied');},1500);
+  });
+});
 
 $('#res-dl').addEventListener('click',()=>{
   const a=document.createElement('a');
@@ -867,7 +881,7 @@ function markVisited(id){
 }
 function showCovToast(){
   const t=$('#cov-toast');
-  t.innerHTML=`<b style="color:var(--green)">100% PROFILE COVERAGE.</b> You've now seen the pipelines, the dashboards, the governance model, and the reasoning behind each. If this looks like a fit — <a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a> · <a href="tel:+12014235266">(201) 423-5266</a>`;
+  t.innerHTML=`<b style="color:var(--green)">100% PROFILE COVERAGE.</b> You've now seen the pipelines, the dashboards, the governance model, and the reasoning behind each. If this looks like a fit: <a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a> · <a href="tel:+12014235266">(201) 423-5266</a>`;
   t.classList.add('show');
   setTimeout(()=>t.classList.remove('show'),9000);
 }
@@ -895,10 +909,10 @@ const KB=[
   ans:'Rahul builds end-to-end Power BI: data modeling, DAX (including USERPRINCIPALNAME() row-level security), Power Query, and App-based distribution. At W.R. Berkley he implemented RLS via an org-wide Azure AD group for zero-touch onboarding, and shipped executive dashboards that lifted decision accuracy 30% and cut reporting turnaround 35%.',
   src:'W.R. Berkley · Technoid resumes'},
  {id:'cmdb',kw:['cmdb','servicenow','configuration item','configuration items','asset governance','asset management','tenable','tanium','infoblox'],
-  ans:'He leads ServiceNow CMDB governance for a 20M+ configuration-item enterprise asset inventory at W.R. Berkley — REST API integrations with Tenable, Tanium, Infoblox, and SnowMirror processing 1.5TB+ of infrastructure data, plus reconciliation/dedup logic and lifecycle/ownership standards.',
+  ans:'He leads ServiceNow CMDB governance for a 20M+ configuration-item enterprise asset inventory at W.R. Berkley: REST API integrations with Tenable, Tanium, Infoblox, and SnowMirror processing 1.5TB+ of infrastructure data, plus reconciliation/dedup logic and lifecycle/ownership standards.',
   src:'W.R. Berkley resume'},
  {id:'genai',kw:['genai','gen ai','rag','chatbot','ai agent','agents','llm','artificial intelligence','bedrock','responsible ai'],
-  ans:'At Wolters Kluwer he led stakeholder discovery to architect a GenAI-powered compliance chatbot — designing RAG/knowledge-retrieval logic and business rules. It now supports 80+ clients annually and cut client onboarding time 40%. He also builds AI cost/usage-monitoring dashboards and has working knowledge of Responsible AI, the NIST AI RMF, and the EU AI Act.',
+  ans:'At Wolters Kluwer he led stakeholder discovery to architect a GenAI-powered compliance chatbot, designing RAG/knowledge-retrieval logic and business rules. It now supports 80+ clients annually and cut client onboarding time 40%. He also builds AI cost/usage-monitoring dashboards and has working knowledge of Responsible AI, the NIST AI RMF, and the EU AI Act.',
   src:'Wolters Kluwer · AI Governance resume'},
  {id:'de',kw:['data engineer','data engineering','etl','elt','pipeline','snowflake','azure data factory','databricks','dbt'],
   ans:'Data engineering side: REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into Snowflake/SQL Server, ETL/ELT pipeline design with Azure Data Factory, Databricks, and dbt, plus reconciliation &amp; dedup logic across 20M+ configuration items.',
@@ -910,19 +924,19 @@ const KB=[
   ans:'Governance is the throughline: an enterprise asset governance model (ownership, lifecycle, data-quality KPIs across 20M+ CIs), row-level security via Azure AD, and data lineage/metadata/PII classification work, with working knowledge of the NIST AI RMF and EU AI Act.',
   src:'Data &amp; AI Governance resume'},
  {id:'ba',kw:['business analyst','business analytics','stakeholder','requirements','brd','frd','user stor'],
-  ans:"He leads stakeholder discovery and requirements (BRD/FRD, user stories) — most notably scoping the GenAI compliance chatbot, which cut client onboarding time 40%. He also leads application-rationalization work across lifecycle, usage, cost, and compliance with senior stakeholders.",
+  ans:"He leads stakeholder discovery and requirements (BRD/FRD, user stories), most notably scoping the GenAI compliance chatbot, which cut client onboarding time 40%. He also leads application-rationalization work across lifecycle, usage, cost, and compliance with senior stakeholders.",
   src:'Business Analyst resume'},
  {id:'exp',kw:['experience','work history','career','timeline','employer','company','companies','job','jobs'],
-  ans:'W.R. Berkley — Data Analyst (Jul 2025–Present, insurance) · Technoid — Data Analyst (Sep 2024–Jul 2025) · Wolters Kluwer — Data Analyst (Jan–May 2024, SaaS/RegTech) · Innovatio Hub — Data Analyst (Dec 2019–Nov 2022, IoT, Hyderabad). Full timeline is in the Career Timeline panel above.'},
+  ans:'W.R. Berkley: Data Analyst (Jul 2025–Present, insurance) · Technoid: Data Analyst (Sep 2024–Jul 2025) · Wolters Kluwer: Data Analyst (Jan–May 2024, SaaS/RegTech) · Innovatio Hub: Data Analyst (Dec 2019–Nov 2022, IoT, Hyderabad). Full timeline is in the Career Timeline panel above.'},
  {id:'edu',kw:['education','degree','university','masters','bachelor','stevens','jntu','mechanical engineering'],
-  ans:'MS, Information Systems — Stevens Institute of Technology, Hoboken NJ (Jan 2023–May 2024). BS, Mechanical Engineering — Jawaharlal Nehru Technological University, Hyderabad (Jul 2018–Aug 2022).'},
+  ans:'MS, Information Systems: Stevens Institute of Technology, Hoboken NJ (Jan 2023–May 2024). BS, Mechanical Engineering: Jawaharlal Nehru Technological University, Hyderabad (Jul 2018–Aug 2022).'},
  {id:'certs',kw:['certification','certifications','cert','certs','credential','license'],
   ans:'17 certifications, including Snowflake SnowPro Core, Microsoft Fabric Analytics Engineer Associate (DP-600), Azure Data Fundamentals (DP-900), Power BI Essential Training, and Machine Learning with Python: Foundations. Full list with issuers and dates is in the Certifications panel above.',
   src:'LinkedIn Licenses &amp; Certifications'},
  {id:'contact',kw:['contact','email','phone','reach','hire him','get in touch','linkedin','relocat'],
-  ans:'Email: chigullapallirahul@gmail.com · Phone: (201) 423-5266 · LinkedIn: linkedin.com/in/rahul-chigullapalli · Based in Jersey City, NJ — open to relocation.'},
+  ans:'Email: chigullapallirahul@gmail.com · Phone: (201) 423-5266 · LinkedIn: linkedin.com/in/rahul-chigullapalli · Based in Jersey City, NJ, open to relocation.'},
  {id:'why',kw:['why hire','why should','strengths','unique','stand out','why him'],
-  ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI — with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
+  ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI, with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
   src:'why_hire_rahul'},
  {id:'impact',kw:['revenue','impact','results','metrics','numbers','roi'],
   ans:'Headline numbers: 20M+ configuration items governed, 1.5TB+ infrastructure data engineered, 40% cut in manual reporting effort, 35% faster reporting turnaround, 30% decision accuracy improvement, and 80+ clients supported by the GenAI chatbot he helped design.'},
@@ -983,7 +997,7 @@ function openChat(){
   chatPanel.classList.add('open');
   if(!chatOpened){
     chatOpened=true;
-    addMsg("Hi — I'm a rule-based assistant, not a live model. I answer from the same data as this dashboard: experience, skills, projects, certifications, and contact. Try a quick question below, or type your own.",'bot');
+    addMsg("Hi, I'm a rule-based assistant, not a live model. I answer from the same data as this dashboard: experience, skills, projects, certifications, and contact. Try a quick question below, or type your own.",'bot');
   }
   $('#chat-input').focus();
 }
