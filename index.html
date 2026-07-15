@@ -1,0 +1,850 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>RAHUL/ANALYTICS — Career Intelligence Dashboard</title>
+<meta name="description" content="Rahul Chigullapalli as a dataset: data engineering, data & business analytics, AI/agents, governance, and BI — query the career of a professional who ships across all of it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0C1017;
+  --panel:#131A24;
+  --panel-2:#182130;
+  --line:rgba(148,178,224,.12);
+  --text:#E9EFF9;
+  --muted:#9FB2CD;
+  --blue:#58A6FF;
+  --green:#3FB950;
+  --orange:#F0883E;
+  --purple:#BC8CFF;
+  --pink:#FF7B9C;
+  --teal:#39C5CF;
+  --r:12px;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--bg);color:var(--text);font-family:'Archivo',system-ui,sans-serif;
+  font-size:16px;line-height:1.65;-webkit-font-smoothing:antialiased}
+::selection{background:var(--blue);color:#04121F}
+a{color:var(--blue);text-decoration:none}
+a:hover{text-decoration:underline}
+button{font-family:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
+.mono{font-family:'JetBrains Mono',monospace}
+.wrap{max-width:1240px;margin:0 auto;padding:0 18px}
+
+/* topbar */
+#top{position:sticky;top:0;z-index:60;background:rgba(12,16,23,.85);backdrop-filter:blur(12px);
+  border-bottom:1px solid var(--line)}
+.top-in{display:flex;align-items:center;gap:16px;height:58px}
+.brand{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
+.brand b{color:var(--blue)}
+.live{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;
+  font-size:11px;color:var(--muted)}
+.live i{width:7px;height:7px;border-radius:50%;background:var(--green);
+  box-shadow:0 0 8px var(--green);animation:pulse 2s infinite}
+@keyframes pulse{50%{opacity:.3}}
+.top-actions{margin-left:auto;display:flex;gap:9px}
+.tbtn{font-family:'JetBrains Mono',monospace;font-size:12px;padding:8px 15px;border-radius:8px;
+  border:1px solid var(--line);background:var(--panel);color:var(--text);transition:.2s}
+.tbtn:hover{border-color:var(--blue)}
+.tbtn.primary{background:var(--blue);color:#04121F;border-color:var(--blue);font-weight:600}
+@media(max-width:640px){.live{display:none}}
+
+/* hero strip */
+#hero{padding:38px 0 8px}
+#hero h1{font-size:clamp(24px,4vw,38px);font-weight:800;letter-spacing:-.02em;line-height:1.15}
+#hero h1 span{color:var(--blue)}
+#hero p{color:var(--muted);max-width:66ch;margin-top:8px;font-size:15.5px;line-height:1.6}
+#hero .mono-sub{font-family:'JetBrains Mono',monospace;font-size:11.5px;color:var(--muted);margin-top:10px}
+#hero .mono-sub b{color:var(--green);font-weight:500}
+
+/* grid + panels */
+.grid{display:grid;grid-template-columns:repeat(12,1fr);gap:14px;padding:22px 0 60px}
+.panel{grid-column:span 12;background:var(--panel);border:1px solid var(--line);
+  border-radius:var(--r);padding:18px 20px;position:relative;overflow:hidden}
+.panel .ph{display:flex;align-items:baseline;justify-content:space-between;gap:10px;margin-bottom:14px}
+.panel .ph h2{font-size:13px;font-weight:600;letter-spacing:.02em;color:var(--text)}
+.panel .ph .src{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+@media(min-width:760px){
+  .c3{grid-column:span 3}.c4{grid-column:span 4}.c6{grid-column:span 6}
+  .c8{grid-column:span 8}.c12{grid-column:span 12}
+}
+
+/* KPI */
+.kpi .n{font-size:clamp(26px,3vw,34px);font-weight:800;letter-spacing:-.02em;line-height:1}
+.kpi .l{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.1em;margin-top:6px}
+.kpi .delta{font-family:'JetBrains Mono',monospace;font-size:11px;margin-top:8px}
+.kpi .delta.up{color:var(--green)}
+.kpi svg{position:absolute;right:10px;bottom:8px;opacity:.7}
+
+/* bars */
+.bar-row{display:grid;grid-template-columns:130px 1fr 44px;align-items:center;gap:10px;margin-bottom:11px}
+.bar-row .bl{font-size:12.5px;color:var(--muted)}
+.bar-row .bv{font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text);text-align:right}
+.track{height:8px;border-radius:99px;background:var(--panel-2);overflow:hidden}
+.fill{height:100%;border-radius:99px;width:0;transition:width 1.1s cubic-bezier(.2,.7,.2,1)}
+
+/* timeline gantt */
+.gantt{display:grid;gap:9px}
+.g-row{display:grid;grid-template-columns:170px 1fr;align-items:center;gap:10px}
+.g-row .gl{font-size:12px;color:var(--muted);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.g-row .gl b{color:var(--text);font-weight:600}
+.g-track{height:22px;background:var(--panel-2);border-radius:6px;position:relative}
+.g-bar{position:absolute;top:3px;bottom:3px;border-radius:5px;min-width:26px;
+  display:flex;align-items:center;padding:0 8px;font-family:'JetBrains Mono',monospace;
+  font-size:9.5px;color:#04121F;font-weight:700;white-space:nowrap;overflow:hidden;
+  transform:scaleX(0);transform-origin:left;transition:transform .9s cubic-bezier(.2,.7,.2,1)}
+.in .g-bar{transform:scaleX(1)}
+@media(max-width:560px){.g-row{grid-template-columns:110px 1fr}.g-bar{font-size:0}}
+
+/* donut */
+.donut-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
+.legend{font-size:12.5px;color:var(--muted);display:grid;gap:7px}
+.legend button{display:flex;align-items:center;gap:8px;background:none;border:none;color:inherit;
+  font:inherit;padding:2px 4px;border-radius:6px;transition:.15s;text-align:left}
+.legend button:hover,.legend button.active{color:var(--text);background:var(--panel-2)}
+.legend i{width:10px;height:10px;border-radius:3px;display:inline-block}
+.donut-c{position:relative}
+.donut-c .center{position:absolute;inset:0;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;font-family:'JetBrains Mono',monospace}
+.donut-c .center b{font-size:22px;font-weight:700}
+.donut-c .center span{font-size:9.5px;color:var(--muted);letter-spacing:.1em}
+
+/* SQL console */
+#sqlpanel{background:#0A0E15}
+.sql-box{font-family:'JetBrains Mono',monospace;font-size:12.5px}
+.sql-q{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
+.q-chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;border-radius:8px;
+  border:1px solid var(--line);background:var(--panel);color:var(--muted);transition:.15s}
+.q-chip:hover,.q-chip.active{color:var(--blue);border-color:var(--blue)}
+.sql-code{background:var(--panel);border:1px solid var(--line);border-radius:9px;
+  padding:12px 14px;color:var(--muted);white-space:pre-wrap;margin-bottom:8px}
+.sql-code .kw{color:var(--purple)}.sql-code .tb{color:var(--orange)}.sql-code .st{color:var(--green)}
+.run-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+.run{background:var(--green);color:#04160A;border:none;border-radius:8px;font-weight:700;
+  font-family:'JetBrains Mono',monospace;font-size:12px;padding:9px 20px}
+.run:hover{filter:brightness(1.1)}
+.exec-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+table.res{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px}
+table.res th{text-align:left;color:var(--blue);font-weight:500;padding:9px 10px;
+  border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
+table.res td{padding:10px;border-bottom:1px solid rgba(148,178,224,.06);color:var(--text);vertical-align:top;font-size:13px;line-height:1.5}
+table.res td.dim{color:var(--muted)}
+.res-scroll{overflow-x:auto}
+
+/* capability lens grid */
+.cap-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:12px}
+.cap-card{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:15px 16px;
+  text-align:left;color:var(--text);transition:.2s;cursor:pointer}
+.cap-card:hover{border-color:var(--cap-c,var(--blue));transform:translateY(-2px)}
+.cap-card.active{border-color:var(--cap-c,var(--blue));background:rgba(88,166,255,.08)}
+.cap-card h3{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin-bottom:9px}
+.cap-card h3 i{width:9px;height:9px;border-radius:3px;background:var(--cap-c,var(--blue));flex:none}
+.cap-card ul{list-style:none;font-size:13px;line-height:1.5;color:var(--muted);display:grid;gap:7px}
+.cap-card li{padding-left:12px;position:relative}
+.cap-card li::before{content:"▸";position:absolute;left:0;color:var(--cap-c,var(--blue));font-size:10px;top:1px}
+.cap-card .cta{margin-top:10px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--cap-c,var(--blue));
+  text-transform:uppercase;letter-spacing:.06em}
+
+/* capability chip bar (project filter) */
+.cap-chips{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:14px}
+.cap-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:6px 12px;border-radius:99px;
+  border:1px solid var(--line);background:var(--panel);color:var(--muted);transition:.15s;display:flex;align-items:center;gap:6px}
+.cap-chip i{width:7px;height:7px;border-radius:2px;background:var(--cap-c,var(--muted))}
+.cap-chip:hover,.cap-chip.active{color:var(--text);border-color:var(--cap-c,var(--blue))}
+
+/* projects table */
+tr.proj{transition:opacity .35s}
+tr.proj.hide{display:none}
+.dtag{font-family:'JetBrains Mono',monospace;font-size:10px;padding:2px 9px;border-radius:99px}
+.ptag-wrap{display:flex;flex-wrap:wrap;gap:5px}
+.ptag{font-family:'JetBrains Mono',monospace;font-size:9.5px;padding:2px 8px;border-radius:99px;
+  border:1px solid var(--line);color:var(--muted);white-space:nowrap;display:flex;align-items:center;gap:5px}
+.ptag i{width:6px;height:6px;border-radius:2px}
+
+/* footer */
+footer{border-top:1px solid var(--line);padding:44px 0 60px;color:var(--muted);font-size:14.5px;line-height:1.7}
+footer .mono{font-size:11px;margin-top:10px}
+
+/* resume modal (reuse pattern) */
+#resume{position:fixed;inset:0;z-index:190;background:rgba(5,8,13,.82);backdrop-filter:blur(8px);
+  display:none;justify-content:center;overflow-y:auto;padding:5vh 14px}
+#resume.open{display:flex}
+.res-doc{width:min(900px,100%);height:max-content;background:#F6F8FA;color:#1B2430;border-radius:12px;
+  padding:20px 22px 22px;font-size:14px;line-height:1.6}
+@media(max-width:640px){.res-doc{padding:14px}}
+.res-bar{display:flex;justify-content:flex-end;gap:9px;margin-bottom:12px}
+.res-bar button{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:8px 16px;
+  border-radius:8px;border:1px solid #C8D1DE;background:#fff;color:#1B2430}
+.res-bar button.dl{background:#1F6FEB;color:#fff;border:none}
+#res-pdf-frame{width:100%;height:82vh;border:1px solid #C8D1DE;border-radius:8px;display:block}
+@media print{
+  body>*{display:none!important}
+  #resume{display:block!important;position:static;background:#fff;padding:0}
+  .res-doc{box-shadow:none;border-radius:0;width:100%;padding:0}
+  .res-bar{display:none!important}
+}
+
+.reveal{opacity:0;transform:translateY(16px);transition:opacity .6s,transform .6s}
+.reveal.in{opacity:1;transform:none}
+@media(prefers-reduced-motion:reduce){
+  *{transition:none!important;animation:none!important}
+  .reveal{opacity:1;transform:none}
+  .g-bar{transform:none}
+  .fill{transition:none}
+}
+
+/* chat widget */
+#chat-fab{position:fixed;right:22px;bottom:22px;z-index:150;width:56px;height:56px;border-radius:50%;
+  background:var(--blue);color:#04121F;border:none;box-shadow:0 8px 24px rgba(0,0,0,.45);
+  display:flex;align-items:center;justify-content:center;transition:.2s}
+#chat-fab:hover{filter:brightness(1.1);transform:translateY(-2px)}
+#chat-fab .fdot{position:absolute;top:2px;right:2px;width:11px;height:11px;border-radius:50%;background:var(--green);
+  border:2px solid var(--bg);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
+#chat-panel{position:fixed;right:22px;bottom:90px;z-index:150;width:min(380px,calc(100vw - 32px));
+  height:min(560px,calc(100vh - 130px));background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:0 20px 60px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden}
+#chat-panel.open{display:flex}
+.chat-hd{display:flex;align-items:center;gap:9px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);flex:none}
+.chat-hd i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex:none}
+.chat-hd .ttl{font-weight:600;font-size:13.5px}
+.chat-hd .sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)}
+.chat-close{margin-left:auto;background:none;border:none;color:var(--muted);font-size:16px;padding:4px 8px;border-radius:6px}
+.chat-close:hover{color:var(--text);background:var(--panel)}
+.chat-body{flex:1;overflow-y:auto;padding:14px 16px;display:flex;flex-direction:column;gap:10px}
+.msg{max-width:88%;padding:9px 12px;border-radius:11px;font-size:13px;line-height:1.5}
+.msg.bot{align-self:flex-start;background:var(--panel-2);border:1px solid var(--line);border-bottom-left-radius:3px}
+.msg.user{align-self:flex-end;background:var(--blue);color:#04121F;border-bottom-right-radius:3px;font-weight:500}
+.msg .src{display:block;margin-top:6px;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted)}
+.msg.user .src{color:rgba(4,18,31,.6)}
+.chat-chips{display:flex;flex-wrap:wrap;gap:6px;padding:0 16px 12px;flex:none}
+.chat-chip{font-family:'JetBrains Mono',monospace;font-size:10.5px;padding:6px 10px;border-radius:99px;
+  border:1px solid var(--line);background:var(--panel-2);color:var(--muted);transition:.15s}
+.chat-chip:hover{color:var(--blue);border-color:var(--blue)}
+.typing{align-self:flex-start;display:flex;gap:4px;padding:11px 13px;background:var(--panel-2);border-radius:11px;border:1px solid var(--line)}
+.typing span{width:5px;height:5px;border-radius:50%;background:var(--muted);animation:tbounce 1.2s infinite}
+.typing span:nth-child(2){animation-delay:.15s}.typing span:nth-child(3){animation-delay:.3s}
+@keyframes tbounce{0%,60%,100%{opacity:.3;transform:translateY(0)}30%{opacity:1;transform:translateY(-3px)}}
+.chat-input-row{display:flex;gap:8px;padding:12px 14px;border-top:1px solid var(--line);background:var(--panel-2);flex:none}
+.chat-input-row input{flex:1;min-width:0;background:var(--bg);border:1px solid var(--line);border-radius:8px;color:var(--text);
+  padding:9px 11px;font-family:inherit;font-size:13px}
+.chat-input-row input:focus{outline:none;border-color:var(--blue)}
+.chat-input-row button{background:var(--blue);color:#04121F;border:none;border-radius:8px;padding:0 14px;font-weight:700;font-size:12.5px}
+@media(max-width:480px){#chat-panel{right:10px;left:10px;width:auto;bottom:82px}#chat-fab{right:16px;bottom:16px}}
+
+/* profile coverage widget */
+#cov-badge{position:fixed;left:22px;bottom:22px;z-index:150;width:56px;height:56px;border-radius:50%;
+  background:var(--panel);border:1px solid var(--line);cursor:pointer;position:fixed;display:flex;
+  align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:.2s;overflow:hidden}
+#cov-badge:hover{border-color:var(--green);transform:translateY(-2px)}
+#cov-badge .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--green) 0%,var(--panel-2) 0)}
+#cov-badge .ring::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--panel)}
+#cov-badge .pct{position:relative;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text)}
+#cov-panel{position:fixed;left:22px;bottom:90px;z-index:150;width:280px;max-width:calc(100vw - 32px);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 60px rgba(0,0,0,.5);
+  padding:15px 17px;display:none}
+#cov-panel.open{display:block}
+.cov-hd{font-size:13px;font-weight:600;margin-bottom:2px}
+.cov-sub{font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted);margin-bottom:11px}
+.cov-item{display:flex;align-items:center;gap:9px;font-size:12.5px;padding:5px 0;color:var(--muted);transition:.2s}
+.cov-item.done{color:var(--text)}
+.cov-item .chk{width:16px;height:16px;border-radius:5px;border:1.5px solid var(--line);display:flex;align-items:center;
+  justify-content:center;font-size:10px;flex:none;transition:.2s}
+.cov-item.done .chk{background:var(--green);border-color:var(--green);color:#04160A}
+#cov-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:170;background:var(--panel);
+  border:1px solid var(--green);border-radius:var(--r);padding:16px 22px;box-shadow:0 20px 60px rgba(0,0,0,.55);
+  font-size:13.5px;line-height:1.55;max-width:min(460px,90vw);
+  opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
+#cov-toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
+@media(max-width:480px){#cov-panel{left:10px;width:calc(100vw - 20px)}#cov-badge{left:16px;bottom:16px}}
+</style>
+</head>
+<body>
+
+<div id="top"><div class="wrap top-in">
+  <span class="brand">RAHUL<b>/ANALYTICS</b></span>
+  <span class="live"><i></i>live · refreshed just now</span>
+  <div class="top-actions">
+    <button class="tbtn" id="res-open">▤ Resume</button>
+    <a class="tbtn" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">in↗</a>
+    <a class="tbtn primary" href="mailto:chigullapallirahul@gmail.com">Contact</a>
+  </div>
+</div></div>
+
+<div class="wrap">
+  <div id="hero">
+    <h1>Career intelligence: <span>Rahul Chigullapalli</span></h1>
+    <p>Data engineer, analyst, and governance lead, rendered as what he builds — a governed dashboard. One profile spans data engineering, data &amp; business analytics, AI/agent systems, governance, and BI — every panel below is queryable, filterable, and traceable to source. Pick your lens below.</p>
+    <div class="mono-sub">source: linkedin.com/in/rahul-chigullapalli · lineage: <b>verified</b> · grain: one row per fact</div>
+  </div>
+
+  <div class="grid">
+
+    <!-- capability lens -->
+    <div class="panel c12 reveal" id="lens-panel">
+      <div class="ph"><h2>Pick your lens — one profile, six practices</h2><span class="src">SELECT DISTINCT capability FROM profile</span></div>
+      <div class="cap-grid" id="capgrid"></div>
+    </div>
+
+    <!-- KPI row -->
+    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="5">0</span>+</div><div class="l">years in data</div><div class="delta up">▲ still compounding</div>
+      <svg width="70" height="26" viewBox="0 0 70 26"><polyline points="0,22 12,18 24,19 36,13 48,10 60,6 70,2" fill="none" stroke="#3FB950" stroke-width="2"/></svg></div>
+    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="20">0</span>M+</div><div class="l">config items governed</div><div class="delta up">▲ enterprise CMDB · W.R. Berkley</div></div>
+    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="1.5">0</span>TB+</div><div class="l">infra data engineered</div><div class="delta up">▲ REST APIs → Snowflake/SQL Server</div></div>
+    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="200">0</span>%</div><div class="l">revenue growth supported</div><div class="delta up">▲ $100K → $300K · pricing &amp; segmentation</div></div>
+
+    <!-- gantt -->
+    <div class="panel c8 reveal" id="gantt-panel">
+      <div class="ph"><h2>Career timeline</h2><span class="src">SELECT * FROM experience ORDER BY start_yr</span></div>
+      <div class="gantt">
+        <div class="g-row"><span class="gl"><b>W.R. Berkley</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:83%;right:0;background:var(--blue)">Governance · DE · BI · Jul'25–now</div></div></div>
+        <div class="g-row"><span class="gl"><b>Technoid</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:68%;width:15%;background:var(--green)">200% revenue growth</div></div></div>
+        <div class="g-row"><span class="gl"><b>Wolters Kluwer</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:58%;width:10%;background:var(--purple)">GenAI compliance bot</div></div></div>
+        <div class="g-row"><span class="gl"><b>Stevens Institute</b> · MS Info Systems</span><div class="g-track"><div class="g-bar" style="left:44%;width:15%;background:var(--pink)">Hoboken, NJ</div></div></div>
+        <div class="g-row"><span class="gl"><b>Innovatio Hub</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:0;width:44%;background:var(--orange)">IoT · governance · Hyderabad</div></div></div>
+      </div>
+      <p class="src" style="margin-top:12px;font-family:'JetBrains Mono',monospace;font-size:10px;color:var(--muted)">relative spans, Dec 2019–present — exact dates in Resume ▤</p>
+    </div>
+
+    <!-- donut -->
+    <div class="panel c4 reveal" id="donut-panel">
+      <div class="ph"><h2>Industry mix</h2><span class="src">GROUP BY industry</span></div>
+      <div class="donut-wrap">
+        <div class="donut-c">
+          <svg width="132" height="132" viewBox="0 0 132 132" id="donut"></svg>
+          <div class="center"><b id="donut-n">4</b><span>INDUSTRIES</span></div>
+        </div>
+        <div class="legend" id="legend"></div>
+      </div>
+      <p style="font-size:11px;color:var(--muted);margin-top:12px" class="mono">click an industry → filters project table below (combine with a capability lens above)</p>
+    </div>
+
+    <!-- skills -->
+    <div class="panel c6 reveal" id="skills-panel">
+      <div class="ph"><h2>Stack proficiency</h2><span class="src">measured in shipped work, not adjectives</span></div>
+      <div class="bar-row"><span class="bl">SQL</span><div class="track"><div class="fill" data-w="95" style="background:var(--blue)"></div></div><span class="bv">95</span></div>
+      <div class="bar-row"><span class="bl">Power BI · DAX (BI)</span><div class="track"><div class="fill" data-w="92" style="background:var(--blue)"></div></div><span class="bv">92</span></div>
+      <div class="bar-row"><span class="bl">Snowflake &amp; pipelines (DE)</span><div class="track"><div class="fill" data-w="86" style="background:var(--green)"></div></div><span class="bv">86</span></div>
+      <div class="bar-row"><span class="bl">Python automation (DE)</span><div class="track"><div class="fill" data-w="84" style="background:var(--green)"></div></div><span class="bv">84</span></div>
+      <div class="bar-row"><span class="bl">Azure · Azure AD (Governance)</span><div class="track"><div class="fill" data-w="82" style="background:var(--pink)"></div></div><span class="bv">82</span></div>
+      <div class="bar-row"><span class="bl">ServiceNow CMDB (Governance)</span><div class="track"><div class="fill" data-w="88" style="background:var(--pink)"></div></div><span class="bv">88</span></div>
+      <div class="bar-row"><span class="bl">GenAI / RAG / Agents (AI)</span><div class="track"><div class="fill" data-w="76" style="background:var(--purple)"></div></div><span class="bv">76</span></div>
+      <div class="bar-row"><span class="bl">Stakeholder &amp; BA (Business)</span><div class="track"><div class="fill" data-w="85" style="background:var(--teal)"></div></div><span class="bv">85</span></div>
+    </div>
+
+    <!-- impact -->
+    <div class="panel c6 reveal" id="impact-panel">
+      <div class="ph"><h2>Measured impact</h2><span class="src">source: employer-verified results</span></div>
+      <div class="bar-row"><span class="bl">Manual reporting effort</span><div class="track"><div class="fill" data-w="40" data-max="40" style="background:var(--green)"></div></div><span class="bv">−40%</span></div>
+      <div class="bar-row"><span class="bl">Decision accuracy</span><div class="track"><div class="fill" data-w="30" data-max="40" style="background:var(--green)"></div></div><span class="bv">+30%</span></div>
+      <div class="bar-row"><span class="bl">Reporting turnaround</span><div class="track"><div class="fill" data-w="35" data-max="40" style="background:var(--blue)"></div></div><span class="bv">−35%</span></div>
+      <div class="bar-row"><span class="bl">Engagement (18 mo)</span><div class="track"><div class="fill" data-w="30" data-max="40" style="background:var(--purple)"></div></div><span class="bv">+30%</span></div>
+      <div class="bar-row"><span class="bl">Revenue growth ($100K→$300K)</span><div class="track"><div class="fill" data-w="40" data-max="40" style="background:var(--orange)"></div></div><span class="bv">+200%</span></div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px" class="mono">bars scaled independently — 200% clipped to axis, like any honest chart footnote</p>
+    </div>
+
+    <!-- SQL console -->
+    <div class="panel c12 reveal" id="sqlpanel">
+      <div class="ph"><h2>SQL console — query the candidate</h2><span class="src">read-only · governed · rls: public</span></div>
+      <div class="sql-box">
+        <div class="sql-q">
+          <button class="q-chip active" data-q="exp">experience</button>
+          <button class="q-chip" data-q="skills">skills</button>
+          <button class="q-chip" data-q="projects">projects</button>
+          <button class="q-chip" data-q="certs">certifications</button>
+          <button class="q-chip" data-q="why">why_hire_rahul</button>
+          <button class="q-chip" data-q="contact">contact</button>
+        </div>
+        <div class="sql-code" id="sqlcode"></div>
+        <div class="run-row"><button class="run" id="runbtn">▶ RUN</button><span class="exec-meta" id="execmeta"></span></div>
+        <div class="res-scroll"><table class="res"><thead id="rhead"></thead><tbody id="rbody"></tbody></table></div>
+      </div>
+    </div>
+
+    <!-- projects table -->
+    <div class="panel c12 reveal" id="proj-panel">
+      <div class="ph"><h2>Projects</h2><span class="src" id="projcount"></span></div>
+      <div class="cap-chips" id="capchips"></div>
+      <div class="res-scroll"><table class="res">
+        <thead><tr><th>Project</th><th>Industry</th><th>Capabilities</th><th>What it proves</th><th>Stack</th></tr></thead>
+        <tbody id="projbody">
+          <tr class="proj" data-d="insurance" data-cap="governance,data-engineering"><td><b>Enterprise CMDB &amp; asset governance</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">REST API integrations (ServiceNow CMDB, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into analytics-ready datasets; reconciliation &amp; dedup across 20M+ CIs</td><td class="dim">ServiceNow CMDB · Python · SQL · REST APIs</td></tr>
+          <tr class="proj" data-d="insurance" data-cap="governance,bi"><td><b>Power BI RLS &amp; AI cost dashboards</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">USERPRINCIPALNAME() DAX row-level security via an org-wide Azure AD group — zero-touch onboarding, published as a Power BI App; AI token-consumption dashboards over Azure Cost Management &amp; Cosmos DB</td><td class="dim">Power BI · DAX · Azure AD</td></tr>
+          <tr class="proj" data-d="insurance" data-cap="governance,business-analytics"><td><b>Application rationalization</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">Led lifecycle, usage, cost &amp; compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions</td><td class="dim">Power BI · SQL · Stakeholder analysis</td></tr>
+          <tr class="proj" data-d="saas" data-cap="ai-agents,governance,business-analytics"><td><b>GenAI compliance chatbot</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%</td><td class="dim">GenAI / LLM · RAG · Compliance</td></tr>
+          <tr class="proj" data-d="saas" data-cap="data-engineering,data-analytics"><td><b>Regulatory dataset restructuring</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Restructured a 700+ record regulatory licensing dataset with SQL &amp; Python — 40% faster search, 70+ hours of manual analysis saved</td><td class="dim">SQL · Python</td></tr>
+          <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>Pricing &amp; customer segmentation</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">SQL-based pricing analysis and segmentation modeling drove 200% revenue growth ($100K → $300K)</td><td class="dim">SQL · Power BI · Statistics</td></tr>
+          <tr class="proj" data-d="finance" data-cap="data-engineering,bi"><td><b>Reporting automation</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Power Query/Power Automate workflows cut manual reporting effort 40% (10→6 hrs/week); SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%</td><td class="dim">Power Query · Power Automate · Power BI</td></tr>
+          <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>A/B testing &amp; engagement</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months</td><td class="dim">SQL · Power BI · A/B Testing</td></tr>
+          <tr class="proj" data-d="iot" data-cap="data-engineering,governance,data-analytics"><td><b>IoT telemetry &amp; data quality</b></td><td><span class="dtag" style="color:var(--orange);border:1px solid var(--orange)">iot</span></td><td></td><td class="dim">Metadata capture &amp; quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35% (~$15K/yr)</td><td class="dim">Tableau · Data quality frameworks</td></tr>
+        </tbody>
+      </table></div>
+    </div>
+
+    <!-- certifications -->
+    <div class="panel c12 reveal" id="cert-panel">
+      <div class="ph"><h2>Certifications &amp; continuous learning</h2><span class="src">source: LinkedIn Licenses &amp; Certifications</span></div>
+      <div class="res-scroll"><table class="res">
+        <thead><tr><th>Certification</th><th>Issuer</th><th>Issued</th><th>Focus</th></tr></thead>
+        <tbody>
+          <tr><td><b>Snowflake SnowPro Core</b></td><td class="dim">Udemy</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep</b></td><td class="dim">LinkedIn / Microsoft Press</td><td class="dim">Feb 2026</td><td><span class="ptag"><i style="background:var(--orange)"></i>BI</span></td></tr>
+          <tr><td><b>Microsoft Azure Data Fundamentals (DP-900) Cert Prep</b></td><td class="dim">LinkedIn / Microsoft Press</td><td class="dim">Jan 2026</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>ETL in Python and SQL</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Networking Foundations: Networking Basics</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Python in Excel</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--blue)"></i>Data Analytics</span></td></tr>
+          <tr><td><b>SAP S/4HANA Essential Training</b></td><td class="dim">LinkedIn Learning</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
+          <tr><td><b>Machine Learning with Python: Foundations</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Aug 2024</td><td><span class="ptag"><i style="background:var(--purple)"></i>AI &amp; Agents</span></td></tr>
+          <tr><td><b>Data Analytics: Graph Analytics</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jul 2024</td><td><span class="ptag"><i style="background:var(--blue)"></i>Data Analytics</span></td></tr>
+          <tr><td><b>Azure Data Factory</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jul 2024</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Power BI Essential Training</b></td><td class="dim">NASBA</td><td class="dim">Jun 2024</td><td><span class="ptag"><i style="background:var(--orange)"></i>BI</span></td></tr>
+          <tr><td><b>Technical Product Management</b> <span class="dim">(PMI &amp; IIBA)</span></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2024</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
+          <tr><td><b>Small Language Models</b></td><td class="dim">LinkedIn Learning</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--purple)"></i>AI &amp; Agents</span></td></tr>
+          <tr><td><b>Project Management</b></td><td class="dim">Harvard Business Publishing</td><td class="dim">Mar 2023</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
+          <tr><td><b>SQL</b></td><td class="dim">HackerRank</td><td class="dim">Feb 2023</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>SQL</b></td><td class="dim">Sololearn</td><td class="dim">Feb 2023</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Python</b></td><td class="dim">Kaggle</td><td class="dim">Feb 2023</td><td><span class="ptag"><i style="background:var(--blue)"></i>Data Analytics</span></td></tr>
+        </tbody>
+      </table></div>
+      <p style="font-size:11px;color:var(--muted);margin-top:12px" class="mono">17 credentials · full list &amp; verification links on LinkedIn</p>
+    </div>
+
+  </div>
+</div>
+
+<footer><div class="wrap">
+  <b style="color:var(--text)">Rahul Chigullapalli</b> · Jersey City, NJ · open to relocation<br>
+  <a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a> · (201) 423-5266 · <a href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">linkedin.com/in/rahul-chigullapalli</a>
+  <div class="mono">© 2026 · one HTML file · zero frameworks · every chart hand-rolled — because a governance guy shows his lineage</div>
+</div></footer>
+
+<div id="resume" role="dialog" aria-label="Resume">
+  <div class="res-doc">
+    <div class="res-bar">
+      <button class="dl" id="res-dl">↓ Download</button>
+      <button id="res-close">✕ Close</button>
+    </div>
+    <div id="res-pdf-view">
+      <iframe id="res-pdf-frame" title="Resume PDF" src="resume.pdf"></iframe>
+    </div>
+  </div>
+</div>
+
+<!-- profile coverage tracker -->
+<button id="cov-badge" aria-label="Profile coverage" title="How much of the profile have you seen?">
+  <span class="ring" id="cov-ring"></span>
+  <span class="pct" id="cov-pct">0%</span>
+</button>
+<div id="cov-panel" role="dialog" aria-label="Profile coverage checklist">
+  <div class="cov-hd">Profile coverage</div>
+  <div class="cov-sub" id="cov-subline">SELECT completeness FROM visit_log</div>
+  <div id="cov-list"></div>
+</div>
+<div id="cov-toast"></div>
+
+<!-- ask-Rahul chatbot -->
+<button id="chat-fab" aria-label="Ask about Rahul" title="Ask about Rahul">
+  <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+  <span class="fdot"></span>
+</button>
+<div id="chat-panel" role="dialog" aria-label="Ask about Rahul">
+  <div class="chat-hd">
+    <i></i>
+    <div><div class="ttl">Ask about Rahul</div><div class="sub">rule-based · reads the data on this page</div></div>
+    <button class="chat-close" id="chat-close" aria-label="Close chat">✕</button>
+  </div>
+  <div class="chat-body" id="chat-body"></div>
+  <div class="chat-chips" id="chat-chips"></div>
+  <div class="chat-input-row">
+    <input id="chat-input" type="text" placeholder="Ask about Power BI, CMDB, GenAI…" autocomplete="off">
+    <button id="chat-send">Send</button>
+  </div>
+</div>
+
+<script>
+const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
+const rm=matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+/* reveals + counters + bar fills */
+const io=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  e.target.classList.add('in');
+  e.target.querySelectorAll('.count').forEach(el=>{
+    if(el.dataset.done)return;el.dataset.done=1;
+    const to=+el.dataset.to,dec=(el.dataset.to.split('.')[1]||'').length,t0=performance.now();
+    if(rm){el.textContent=to;return}
+    (function f(t){const p=Math.min(1,(t-t0)/900);
+      el.textContent=(to*(1-Math.pow(1-p,3))).toFixed(dec);
+      if(p<1)requestAnimationFrame(f);})(t0);
+  });
+  e.target.querySelectorAll('.fill').forEach(el=>{
+    const max=+(el.dataset.max||100);
+    el.style.width=(Math.min(+el.dataset.w,max)/max*100)+'%';
+  });
+  io.unobserve(e.target);
+}),{threshold:.2});
+$$('.reveal').forEach(el=>io.observe(el));
+
+/* capability lens data + rendering */
+const CAPS=[
+  {k:'data-engineering',label:'Data Engineering',c:'var(--green)',
+    bullets:['REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) — 1.5TB+ into Snowflake/SQL Server','ETL/ELT pipeline design — Azure Data Factory, Databricks, dbt, Python/pandas','Reconciliation &amp; deduplication logic across 20M+ configuration items']},
+  {k:'data-analytics',label:'Data Analytics',c:'var(--blue)',
+    bullets:['SQL (CTEs, window functions) + Python driving pricing &amp; segmentation — 200% revenue growth','A/B testing &amp; cohort analysis — +30% engagement over 18 months','IoT telemetry analysis — 300+ error patterns surfaced, 22% faster issue ID']},
+  {k:'ai-agents',label:'AI &amp; Agents',c:'var(--purple)',
+    bullets:['Designed RAG / knowledge-retrieval logic &amp; business rules for a GenAI compliance chatbot — 80+ clients','AI cost &amp; usage monitoring — token-consumption dashboards guiding infra spend','Working knowledge of Responsible AI, NIST AI RMF, EU AI Act; AWS Bedrock']},
+  {k:'governance',label:'Governance',c:'var(--pink)',
+    bullets:['Enterprise asset governance model — ownership, lifecycle, data-quality KPIs across 20M+ CIs','Row-level security in Power BI via Azure AD groups — zero-touch, auditable access','Data lineage, metadata management, CDEs, PII classification, audit readiness']},
+  {k:'bi',label:'Business Intelligence',c:'var(--orange)',
+    bullets:['End-to-end Power BI: data modeling, DAX, Power Query, RLS, App-based distribution','Executive dashboards — 35% faster reporting turnaround, +30% decision accuracy','AI cost-intelligence dashboards over Azure Cost Management &amp; Cosmos DB']},
+  {k:'business-analytics',label:'Business Analytics',c:'var(--teal)',
+    bullets:['Led stakeholder discovery &amp; requirements (BRD/FRD, user stories) — 40% faster client onboarding','Application rationalization across lifecycle, usage, cost &amp; compliance with senior stakeholders','KPI development &amp; workshop facilitation turning requirements into shipped analytics']}
+];
+const capgrid=$('#capgrid');
+CAPS.forEach(cp=>{
+  const card=document.createElement('button');
+  card.className='cap-card';card.dataset.cap=cp.k;card.style.setProperty('--cap-c',cp.c);
+  card.innerHTML=`<h3><i></i>${cp.label}</h3><ul>${cp.bullets.map(b=>`<li>${b}</li>`).join('')}</ul><div class="cta">view projects →</div>`;
+  card.addEventListener('click',()=>{filterCap(cp.k);$('#proj-panel').scrollIntoView({behavior:rm?'auto':'smooth',block:'start'})});
+  capgrid.appendChild(card);
+});
+const capMap=Object.fromEntries(CAPS.map(c=>[c.k,c]));
+/* fill capability pills in project rows */
+$$('#projbody .proj').forEach(r=>{
+  const caps=(r.dataset.cap||'').split(',').filter(Boolean);
+  const cell=r.children[2];
+  cell.innerHTML=`<div class="ptag-wrap">${caps.map(k=>`<span class="ptag"><i style="background:${capMap[k].c}"></i>${capMap[k].label}</span>`).join('')}</div>`;
+});
+/* capability chip bar above project table */
+const capchips=$('#capchips');
+const capAllBtn=document.createElement('button');
+capAllBtn.className='cap-chip active';capAllBtn.dataset.cap='';
+capAllBtn.innerHTML='<i style="background:#8CA0BE"></i>All';
+capAllBtn.addEventListener('click',()=>filterCap(null));
+capchips.appendChild(capAllBtn);
+CAPS.forEach(cp=>{
+  const b=document.createElement('button');
+  b.className='cap-chip';b.dataset.cap=cp.k;b.style.setProperty('--cap-c',cp.c);
+  b.innerHTML=`<i></i>${cp.label}`;
+  b.addEventListener('click',()=>filterCap(cp.k));
+  capchips.appendChild(b);
+});
+let curCap=null;
+function filterCap(k){
+  curCap=curCap===k?null:k;
+  $$('.cap-chip').forEach(b=>b.classList.toggle('active',b.dataset.cap===(curCap||'')));
+  $$('.cap-card').forEach(c=>c.classList.toggle('active',c.dataset.cap===curCap));
+  applyFilters();
+}
+
+/* donut with cross-filter */
+const domains=[
+  {d:'iot',v:56,c:'#F0883E'},
+  {d:'insurance',v:20,c:'#58A6FF'},
+  {d:'finance',v:16,c:'#3FB950'},
+  {d:'saas',v:8,c:'#BC8CFF'}];
+const svg=$('#donut'),R=52,C=2*Math.PI*R;let acc=0;
+domains.forEach(o=>{
+  const el=document.createElementNS('http://www.w3.org/2000/svg','circle');
+  el.setAttribute('cx',66);el.setAttribute('cy',66);el.setAttribute('r',R);
+  el.setAttribute('fill','none');el.setAttribute('stroke',o.c);el.setAttribute('stroke-width',15);
+  el.setAttribute('stroke-dasharray',`${o.v/100*C} ${C}`);
+  el.setAttribute('stroke-dashoffset',-acc/100*C);
+  el.setAttribute('transform','rotate(-90 66 66)');
+  el.style.cursor='pointer';el.dataset.d=o.d;
+  el.addEventListener('click',()=>filterProj(o.d));
+  svg.appendChild(el);acc+=o.v;
+});
+const leg=$('#legend');
+const allBtn=document.createElement('button');
+allBtn.className='active';allBtn.dataset.d='';
+allBtn.innerHTML='<i style="background:#8CA0BE"></i>show all';
+allBtn.addEventListener('click',()=>filterProj(null));
+leg.appendChild(allBtn);
+domains.forEach(o=>{
+  const b=document.createElement('button');
+  b.innerHTML=`<i style="background:${o.c}"></i>${o.d} · ${o.v}%`;
+  b.dataset.d=o.d;b.addEventListener('click',()=>filterProj(o.d));
+  leg.appendChild(b);
+});
+let curFilter=null;
+function filterProj(d){
+  curFilter=curFilter===d?null:d;
+  $$('#legend button').forEach(b=>b.classList.toggle('active',b.dataset.d===(curFilter||'')));
+  applyFilters();
+}
+function applyFilters(){
+  $$('#projbody .proj').forEach(r=>{
+    const capList=(r.dataset.cap||'').split(',');
+    const hide=(curFilter&&r.dataset.d!==curFilter)||(curCap&&!capList.includes(curCap));
+    r.classList.toggle('hide',hide);
+  });
+  const n=$$('#projbody .proj:not(.hide)').length;
+  const total=$$('#projbody .proj').length;
+  const clauses=[];
+  if(curFilter)clauses.push(`industry = '${curFilter}'`);
+  if(curCap)clauses.push(`capability = '${curCap}'`);
+  $('#projcount').textContent=clauses.length?`WHERE ${clauses.join(' AND ')} → ${n} rows`:`${total} rows · click an industry or capability to filter`;
+}
+applyFilters();
+
+/* SQL console */
+const Q={
+exp:{sql:`<span class="kw">SELECT</span> role, org, dates, highlight\n<span class="kw">FROM</span> <span class="tb">experience</span>\n<span class="kw">ORDER BY</span> start_dt <span class="kw">DESC</span>;`,
+ head:['role','org','dates','highlight'],
+ rows:[['Data Analyst','W.R. Berkley (via Stratus)','Jul 2025 – Present','1.5TB+ data engineered · 20M+ CIs governed · RLS · AI cost dashboards'],
+ ['Data Analyst','Technoid','Sep 2024 – Jul 2025','200% revenue growth · +30% accuracy · −35% turnaround'],
+ ['Data Analyst','Wolters Kluwer','Jan 2024 – May 2024','GenAI compliance chatbot — RAG design, 80+ clients'],
+ ['MS Information Systems','Stevens Institute of Technology','Jan 2023 – May 2024','Hoboken, NJ'],
+ ['Data Analyst','Innovatio Hub','Dec 2019 – Nov 2022','IoT telemetry · governance · −40% system errors']]},
+skills:{sql:`<span class="kw">SELECT</span> capability, tools\n<span class="kw">FROM</span> <span class="tb">skills</span>;`,
+ head:['capability','tools'],
+ rows:[['data engineering','Snowflake · Azure pipelines · Python/SQL automation · CMDB data modeling'],
+ ['data analytics','SQL · statistics · A/B & incrementality testing · trend analysis'],
+ ['ai & agents','GenAI/LLM · RAG · agentic workflows · AWS Bedrock'],
+ ['governance','Row-level security · Azure AD · lineage · ServiceNow CMDB'],
+ ['business intelligence','Power BI · DAX · executive dashboards'],
+ ['business analytics','Stakeholder requirements · process analysis · decision support'],
+ ['security','Tenable']]},
+projects:{sql:`<span class="kw">SELECT</span> name, proves\n<span class="kw">FROM</span> <span class="tb">projects</span>\n<span class="kw">WHERE</span> shipped = <span class="st">true</span>;`,
+ head:['name','proves'],
+ rows:[['Enterprise CMDB & asset governance','1.5TB+ engineered, 20M+ CIs reconciled — a source of truth leadership trusts'],
+ ['Power BI RLS & AI cost dashboards','access governance that scales with the org chart, via Azure AD'],
+ ['GenAI compliance chatbot','AI ships in regulated domains — RAG + governance designed in, 80+ clients'],
+ ['Pricing & customer segmentation','200% revenue growth ($100K → $300K)'],
+ ['Reporting automation','manual effort cut 40% with Power Query / Power Automate'],
+ ['IoT telemetry & data quality','300+ error patterns surfaced, 35% lower energy use']]},
+certs:{sql:`<span class="kw">SELECT</span> name, issuer, issued\n<span class="kw">FROM</span> <span class="tb">certifications</span>\n<span class="kw">ORDER BY</span> issued <span class="kw">DESC</span>;`,
+ head:['name','issuer','issued'],
+ rows:[['Snowflake SnowPro Core','Udemy','—'],
+ ['Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep','LinkedIn / Microsoft Press','Feb 2026'],
+ ['Microsoft Azure Data Fundamentals (DP-900) Cert Prep','LinkedIn / Microsoft Press','Jan 2026'],
+ ['ETL in Python and SQL','LinkedIn Learning','Jun 2025'],
+ ['Networking Foundations: Networking Basics','LinkedIn Learning','Jun 2025'],
+ ['Python in Excel','LinkedIn Learning','Jun 2025'],
+ ['SAP S/4HANA Essential Training','LinkedIn Learning','—'],
+ ['Machine Learning with Python: Foundations','LinkedIn Learning','Aug 2024'],
+ ['Data Analytics: Graph Analytics','LinkedIn Learning','Jul 2024'],
+ ['Azure Data Factory','LinkedIn Learning','Jul 2024'],
+ ['Power BI Essential Training','NASBA','Jun 2024'],
+ ['Technical Product Management (PMI & IIBA)','LinkedIn Learning','Jun 2024'],
+ ['Small Language Models','LinkedIn Learning','—'],
+ ['Project Management','Harvard Business Publishing','Mar 2023'],
+ ['SQL','HackerRank','Feb 2023'],
+ ['SQL','Sololearn','Feb 2023'],
+ ['Python','Kaggle','Feb 2023']]},
+why:{sql:`<span class="kw">SELECT</span> reason\n<span class="kw">FROM</span> <span class="tb">why_hire_rahul</span>\n<span class="kw">LIMIT</span> 6;`,
+ head:['reason'],
+ rows:[['Full-stack data: builds the pipeline (DE), the dashboard (BI), and the model behind the AI'],
+ ['Governance-first: the layer that makes analytics and AI outputs defensible, not just impressive'],
+ ['Proof over adjectives: RLS demo, metrics, and this dashboard are all working artifacts'],
+ ['Bridges technical and business: stakeholder requirements → shipped analytics, not just SQL'],
+ ['Cross-domain: insurance, finance, SaaS, IoT — pattern recognition across regulated industries'],
+ ['Ships without frameworks: this entire dashboard is one hand-rolled HTML file']]},
+contact:{sql:`<span class="kw">SELECT</span> channel, value\n<span class="kw">FROM</span> <span class="tb">contact</span>;`,
+ head:['channel','value'],
+ rows:[['email','<a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a>'],
+ ['phone','(201) 423-5266'],
+ ['linkedin','<a href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">linkedin.com/in/rahul-chigullapalli</a>'],
+ ['base','Jersey City, NJ · open to relocation']]}};
+let curQ='exp';
+function setQ(k){curQ=k;
+  $$('.q-chip').forEach(c=>c.classList.toggle('active',c.dataset.q===k));
+  $('#sqlcode').innerHTML=Q[k].sql;
+  $('#rhead').innerHTML='';$('#rbody').innerHTML='';$('#execmeta').textContent='';}
+function runQ(){
+  const q=Q[curQ];
+  $('#rhead').innerHTML='<tr>'+q.head.map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  $('#rbody').innerHTML=q.rows.map(r=>'<tr>'+r.map((c,i)=>`<td class="${i?'dim':''}">${c}</td>`).join('')+'</tr>').join('');
+  $('#execmeta').textContent=`${q.rows.length} rows · ${(Math.random()*40+8|0)} ms · lineage: verified`;}
+$$('.q-chip').forEach(c=>c.addEventListener('click',()=>{setQ(c.dataset.q);runQ()}));
+$('#runbtn').addEventListener('click',()=>{runQ();markVisited('sql')});
+setQ('exp');runQ();
+
+/* resume modal */
+const res=$('#resume');
+function openRes(o){res.classList.toggle('open',o);document.body.style.overflow=o?'hidden':''}
+$('#res-open').addEventListener('click',()=>{openRes(true);markVisited('resume')});
+$('#res-close').addEventListener('click',()=>openRes(false));
+res.addEventListener('click',e=>{if(e.target===res)openRes(false)});
+addEventListener('keydown',e=>{if(e.key==='Escape')openRes(false)});
+
+$('#res-dl').addEventListener('click',()=>{
+  const a=document.createElement('a');
+  a.href='resume.pdf';a.download='Rahul_Chigullapalli_Resume.pdf';
+  document.body.appendChild(a);a.click();a.remove();
+});
+
+/* ===== profile coverage tracker ===== */
+const COV_ITEMS=[
+ {id:'lens',label:'Explored the 6 capability lenses'},
+ {id:'timeline',label:'Viewed the career timeline'},
+ {id:'industries',label:'Viewed the industry mix'},
+ {id:'skills',label:'Viewed stack proficiency'},
+ {id:'impact',label:'Viewed measured impact'},
+ {id:'sql',label:'Ran a query in the SQL console'},
+ {id:'projects',label:'Viewed the projects table'},
+ {id:'certs',label:'Viewed certifications'},
+ {id:'resume',label:'Opened the resume'},
+ {id:'chat',label:'Asked the chatbot a question'}
+];
+const visited=new Set();
+let celebrated=false;
+const covList=$('#cov-list');
+COV_ITEMS.forEach(it=>{
+  const row=document.createElement('div');
+  row.className='cov-item';row.dataset.id=it.id;
+  row.innerHTML=`<span class="chk">✓</span><span>${it.label}</span>`;
+  covList.appendChild(row);
+});
+function markVisited(id){
+  if(visited.has(id))return;
+  visited.add(id);
+  const pct=Math.round(visited.size/COV_ITEMS.length*100);
+  $('#cov-pct').textContent=pct+'%';
+  $('#cov-ring').style.background=`conic-gradient(var(--green) ${pct}%, var(--panel-2) 0)`;
+  const row=document.querySelector(`.cov-item[data-id="${id}"]`);
+  if(row)row.classList.add('done');
+  $('#cov-subline').textContent=`${visited.size}/${COV_ITEMS.length} sections · WHERE seen = true`;
+  if(pct===100&&!celebrated){celebrated=true;showCovToast();}
+}
+function showCovToast(){
+  const t=$('#cov-toast');
+  t.innerHTML=`<b style="color:var(--green)">100% PROFILE COVERAGE.</b> You've now seen the pipelines, the dashboards, the governance model, and the reasoning behind each. If this looks like a fit — <a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a> · <a href="tel:+12014235266">(201) 423-5266</a>`;
+  t.classList.add('show');
+  setTimeout(()=>t.classList.remove('show'),9000);
+}
+const covIO=new IntersectionObserver(es=>es.forEach(e=>{
+  if(!e.isIntersecting)return;
+  markVisited(e.target.dataset.cov);
+  covIO.unobserve(e.target);
+}),{threshold:.35});
+[['lens-panel','lens'],['gantt-panel','timeline'],['donut-panel','industries'],['skills-panel','skills'],
+ ['impact-panel','impact'],['proj-panel','projects'],['cert-panel','certs']].forEach(([elId,covId])=>{
+  const el=document.getElementById(elId);
+  if(el){el.dataset.cov=covId;covIO.observe(el);}
+});
+const covBadge=$('#cov-badge'),covPanel=$('#cov-panel');
+covBadge.addEventListener('click',()=>covPanel.classList.toggle('open'));
+document.addEventListener('click',e=>{
+  if(covPanel.classList.contains('open')&&!covPanel.contains(e.target)&&e.target!==covBadge&&!covBadge.contains(e.target)){
+    covPanel.classList.remove('open');
+  }
+});
+
+/* ===== ask-Rahul chatbot ===== */
+const KB=[
+ {id:'powerbi',kw:['power bi','powerbi','dax','row-level security','row level security','rls','power query'],
+  ans:'Rahul builds end-to-end Power BI: data modeling, DAX (including USERPRINCIPALNAME() row-level security), Power Query, and App-based distribution. At W.R. Berkley he implemented RLS via an org-wide Azure AD group for zero-touch onboarding, and shipped executive dashboards that lifted decision accuracy 30% and cut reporting turnaround 35%.',
+  src:'W.R. Berkley · Technoid resumes'},
+ {id:'cmdb',kw:['cmdb','servicenow','configuration item','configuration items','asset governance','asset management','tenable','tanium','infoblox'],
+  ans:'He leads ServiceNow CMDB governance for a 20M+ configuration-item enterprise asset inventory at W.R. Berkley — REST API integrations with Tenable, Tanium, Infoblox, and SnowMirror processing 1.5TB+ of infrastructure data, plus reconciliation/dedup logic and lifecycle/ownership standards.',
+  src:'W.R. Berkley resume'},
+ {id:'genai',kw:['genai','gen ai','rag','chatbot','ai agent','agents','llm','artificial intelligence','bedrock','responsible ai'],
+  ans:'At Wolters Kluwer he led stakeholder discovery to architect a GenAI-powered compliance chatbot — designing RAG/knowledge-retrieval logic and business rules. It now supports 80+ clients annually and cut client onboarding time 40%. He also builds AI cost/usage-monitoring dashboards and has working knowledge of Responsible AI, the NIST AI RMF, and the EU AI Act.',
+  src:'Wolters Kluwer · AI Governance resume'},
+ {id:'de',kw:['data engineer','data engineering','etl','elt','pipeline','snowflake','azure data factory','databricks','dbt'],
+  ans:'Data engineering side: REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into Snowflake/SQL Server, ETL/ELT pipeline design with Azure Data Factory, Databricks, and dbt, plus reconciliation &amp; dedup logic across 20M+ configuration items.',
+  src:'Data Engineer resume'},
+ {id:'da',kw:['data analyst','data analytics','a/b test','ab test','segmentation','statistics','forecasting'],
+  ans:'On the analytics side: SQL (CTEs, window functions) + Python driving pricing and segmentation work that grew revenue 200% ($100K → $300K), plus A/B testing that lifted engagement 30% over 18 months.',
+  src:'Data Analyst resume'},
+ {id:'gov',kw:['governance','lineage','compliance','audit','pii','critical data element','metadata'],
+  ans:'Governance is the throughline: an enterprise asset governance model (ownership, lifecycle, data-quality KPIs across 20M+ CIs), row-level security via Azure AD, and data lineage/metadata/PII classification work, with working knowledge of the NIST AI RMF and EU AI Act.',
+  src:'Data &amp; AI Governance resume'},
+ {id:'ba',kw:['business analyst','business analytics','stakeholder','requirements','brd','frd','user stor'],
+  ans:"He leads stakeholder discovery and requirements (BRD/FRD, user stories) — most notably scoping the GenAI compliance chatbot, which cut client onboarding time 40%. He also leads application-rationalization work across lifecycle, usage, cost, and compliance with senior stakeholders.",
+  src:'Business Analyst resume'},
+ {id:'exp',kw:['experience','work history','career','timeline','employer','company','companies','job','jobs'],
+  ans:'W.R. Berkley — Data Analyst (Jul 2025–Present, insurance) · Technoid — Data Analyst (Sep 2024–Jul 2025) · Wolters Kluwer — Data Analyst (Jan–May 2024, SaaS/RegTech) · Innovatio Hub — Data Analyst (Dec 2019–Nov 2022, IoT, Hyderabad). Full timeline is in the Career Timeline panel above.'},
+ {id:'edu',kw:['education','degree','university','masters','bachelor','stevens','jntu','mechanical engineering'],
+  ans:'MS, Information Systems — Stevens Institute of Technology, Hoboken NJ (Jan 2023–May 2024). BS, Mechanical Engineering — Jawaharlal Nehru Technological University, Hyderabad (Jul 2018–Aug 2022).'},
+ {id:'certs',kw:['certification','certifications','cert','certs','credential','license'],
+  ans:'17 certifications, including Snowflake SnowPro Core, Microsoft Fabric Analytics Engineer Associate (DP-600), Azure Data Fundamentals (DP-900), Power BI Essential Training, and Machine Learning with Python: Foundations. Full list with issuers and dates is in the Certifications panel above.',
+  src:'LinkedIn Licenses &amp; Certifications'},
+ {id:'contact',kw:['contact','email','phone','reach','hire him','get in touch','linkedin','relocat'],
+  ans:'Email: chigullapallirahul@gmail.com · Phone: (201) 423-5266 · LinkedIn: linkedin.com/in/rahul-chigullapalli · Based in Jersey City, NJ — open to relocation.'},
+ {id:'why',kw:['why hire','why should','strengths','unique','stand out','why him'],
+  ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI — with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
+  src:'why_hire_rahul'},
+ {id:'impact',kw:['revenue','impact','results','metrics','numbers','roi'],
+  ans:'Headline numbers: 200% revenue growth ($100K → $300K), 20M+ configuration items governed, 1.5TB+ infrastructure data engineered, 40% cut in manual reporting effort, 35% faster reporting turnaround, and 80+ clients supported by the GenAI chatbot he helped design.'},
+ {id:'industries',kw:['industry','industries','insurance','finance','saas','iot','domain'],
+  ans:'Insurance (W.R. Berkley, a Fortune 500 insurer) · Technoid · SaaS/RegTech (Wolters Kluwer) · IoT (Innovatio Hub, Hyderabad). Weighted by tenure in the Industry Mix donut above.'},
+ {id:'greeting',kw:['hi','hello','hey','yo','sup','greetings'],
+  ans:"Hi! I hope you're doing well. I'm a rule-based assistant, not a live model. I answer from the same data as this dashboard: experience, skills, projects, certifications, and contact info. Try a quick question below, or type your own."}
+];
+const FALLBACK="I don't have a scripted answer for that one. I'm rule-based, not a live model. Try asking about Power BI, CMDB, GenAI, certifications, or his background, or use the SQL console above. You can also reach him directly: chigullapallirahul@gmail.com.";
+function matchKB(q){
+  const s=q.toLowerCase();
+  let best=null,bestScore=0;
+  KB.forEach(item=>{
+    let score=0;
+    item.kw.forEach(k=>{if(s.includes(k))score+=k.split(' ').length*100+k.length;});
+    if(score>bestScore){bestScore=score;best=item;}
+  });
+  return bestScore>0?best:null;
+}
+function escapeHtml(s){const d=document.createElement('div');d.textContent=s;return d.innerHTML;}
+function addMsg(html,who,src){
+  const body=$('#chat-body');
+  const div=document.createElement('div');
+  div.className='msg '+who;
+  div.innerHTML=html+(src?`<span class="src">src: ${src}</span>`:'');
+  body.appendChild(div);
+  body.scrollTop=body.scrollHeight;
+}
+function showTyping(){
+  const body=$('#chat-body');
+  const t=document.createElement('div');
+  t.className='typing';t.id='typing-ind';
+  t.innerHTML='<span></span><span></span><span></span>';
+  body.appendChild(t);body.scrollTop=body.scrollHeight;
+}
+function hideTyping(){const t=$('#typing-ind');if(t)t.remove();}
+function askBot(q){
+  addMsg(escapeHtml(q),'user');
+  markVisited('chat');
+  showTyping();
+  setTimeout(()=>{
+    hideTyping();
+    const m=matchKB(q);
+    if(m)addMsg(m.ans,'bot',m.src);
+    else addMsg(FALLBACK,'bot');
+  },500+Math.random()*450);
+}
+const STARTERS=['Power BI experience','GenAI chatbot project','Certifications','Contact info'];
+const chatChips=$('#chat-chips');
+STARTERS.forEach(q=>{
+  const b=document.createElement('button');b.className='chat-chip';b.type='button';b.textContent=q;
+  b.addEventListener('click',()=>askBot(q));
+  chatChips.appendChild(b);
+});
+let chatOpened=false;
+const chatPanel=$('#chat-panel');
+function openChat(){
+  chatPanel.classList.add('open');
+  if(!chatOpened){
+    chatOpened=true;
+    addMsg("Hi — I'm a rule-based assistant, not a live model. I answer from the same data as this dashboard: experience, skills, projects, certifications, and contact. Try a quick question below, or type your own.",'bot');
+  }
+  $('#chat-input').focus();
+}
+$('#chat-fab').addEventListener('click',openChat);
+$('#chat-close').addEventListener('click',()=>chatPanel.classList.remove('open'));
+function sendCurrent(){
+  const inp=$('#chat-input');const v=inp.value.trim();
+  if(!v)return;
+  inp.value='';
+  askBot(v);
+}
+$('#chat-send').addEventListener('click',sendCurrent);
+$('#chat-input').addEventListener('keydown',e=>{if(e.key==='Enter')sendCurrent();});
+addEventListener('keydown',e=>{if(e.key==='Escape')chatPanel.classList.remove('open')});
+</script>
+</body>
+</html>
