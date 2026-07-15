@@ -10,12 +10,12 @@
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#F4F6FA;
-  --panel:#FFFFFF;
-  --panel-2:#EEF2F8;
-  --line:rgba(15,35,65,.12);
-  --text:#101828;
-  --muted:#5B6B85;
+  --bg:#FBF6EC;
+  --panel:#FFFEFA;
+  --panel-2:#ECE1C9;
+  --line:rgba(120,95,45,.18);
+  --text:#2B2417;
+  --muted:#5A4D37;
   --blue:#2563EB;
   --green:#15803D;
   --orange:#C2570C;
@@ -36,7 +36,7 @@ button{font-family:inherit;cursor:pointer}
 .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
 
 /* topbar */
-#top{position:sticky;top:0;z-index:60;background:rgba(244,246,250,.85);backdrop-filter:blur(12px);
+#top{position:sticky;top:0;z-index:60;background:rgba(251,246,236,.85);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line)}
 .top-in{display:flex;align-items:center;gap:16px;height:58px}
 .brand{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
@@ -115,7 +115,7 @@ button{font-family:inherit;cursor:pointer}
 .donut-c .center span{font-size:9.5px;color:var(--muted);letter-spacing:.1em}
 
 /* SQL console */
-#sqlpanel{background:#EAEFF7}
+#sqlpanel{background:#F2E9D3}
 .sql-box{font-family:'JetBrains Mono',monospace;font-size:12.5px}
 .sql-q{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .q-chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;border-radius:8px;
@@ -184,14 +184,14 @@ footer .mono{font-size:11px;margin-top:10px}
 #resume{position:fixed;inset:0;z-index:190;background:rgba(5,8,13,.82);backdrop-filter:blur(8px);
   display:none;justify-content:center;overflow-y:auto;padding:5vh 14px}
 #resume.open{display:flex}
-.res-doc{width:min(900px,100%);height:max-content;background:#F6F8FA;color:#1B2430;border-radius:12px;
+.res-doc{width:min(900px,100%);height:max-content;background:#FDF9EE;color:#2B2417;border-radius:12px;
   padding:20px 22px 22px;font-size:14px;line-height:1.6}
 @media(max-width:640px){.res-doc{padding:14px}}
 .res-bar{display:flex;justify-content:flex-end;gap:9px;margin-bottom:12px}
 .res-bar button{font-family:'JetBrains Mono',monospace;font-size:11.5px;padding:8px 16px;
-  border-radius:8px;border:1px solid #C8D1DE;background:#fff;color:#1B2430}
-.res-bar button.dl{background:#1F6FEB;color:#fff;border:none}
-#res-pdf-frame{width:100%;height:82vh;border:1px solid #C8D1DE;border-radius:8px;display:block}
+  border-radius:8px;border:1px solid #DDD0AC;background:#fff;color:#2B2417}
+.res-bar button.dl{background:#2563EB;color:#fff;border:none}
+#res-pdf-frame{width:100%;height:82vh;border:1px solid #DDD0AC;border-radius:8px;display:block}
 @media print{
   body>*{display:none!important}
   #resume{display:block!important;position:static;background:#fff;padding:0}
@@ -305,14 +305,14 @@ footer .mono{font-size:11px;margin-top:10px}
       <svg width="70" height="26" viewBox="0 0 70 26"><polyline points="0,22 12,18 24,19 36,13 48,10 60,6 70,2" fill="none" stroke="#15803D" stroke-width="2"/></svg></div>
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="20">0</span>M+</div><div class="l">config items governed</div><div class="delta up">▲ enterprise CMDB · W.R. Berkley</div></div>
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="1.5">0</span>TB+</div><div class="l">infra data engineered</div><div class="delta up">▲ REST APIs → Snowflake/SQL Server</div></div>
-    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="200">0</span>%</div><div class="l">revenue growth supported</div><div class="delta up">▲ $100K → $300K · pricing &amp; segmentation</div></div>
+    <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="80">0</span>+</div><div class="l">clients served by genai chatbot</div><div class="delta up">▲ RAG-based compliance assistant · Wolters Kluwer</div></div>
 
     <!-- gantt -->
     <div class="panel c8 reveal" id="gantt-panel">
       <div class="ph"><h2>Career timeline</h2><span class="src">SELECT * FROM experience ORDER BY start_yr</span></div>
       <div class="gantt">
         <div class="g-row"><span class="gl"><b>W.R. Berkley</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:83%;right:0;background:var(--blue)">Governance · DE · BI · Jul'25–now</div></div></div>
-        <div class="g-row"><span class="gl"><b>Technoid</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:68%;width:15%;background:var(--green)">200% revenue growth</div></div></div>
+        <div class="g-row"><span class="gl"><b>Technoid</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:68%;width:15%;background:var(--green)">−35% reporting turnaround</div></div></div>
         <div class="g-row"><span class="gl"><b>Wolters Kluwer</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:58%;width:10%;background:var(--purple)">GenAI compliance bot</div></div></div>
         <div class="g-row"><span class="gl"><b>Stevens Institute</b> · MS Info Systems</span><div class="g-track"><div class="g-bar" style="left:44%;width:15%;background:var(--pink)">Hoboken, NJ</div></div></div>
         <div class="g-row"><span class="gl"><b>Innovatio Hub</b> · Data Analyst</span><div class="g-track"><div class="g-bar" style="left:0;width:44%;background:var(--orange)">IoT · governance · Hyderabad</div></div></div>
@@ -353,8 +353,8 @@ footer .mono{font-size:11px;margin-top:10px}
       <div class="bar-row"><span class="bl">Decision accuracy</span><div class="track"><div class="fill" data-w="30" data-max="40" style="background:var(--green)"></div></div><span class="bv">+30%</span></div>
       <div class="bar-row"><span class="bl">Reporting turnaround</span><div class="track"><div class="fill" data-w="35" data-max="40" style="background:var(--blue)"></div></div><span class="bv">−35%</span></div>
       <div class="bar-row"><span class="bl">Engagement (18 mo)</span><div class="track"><div class="fill" data-w="30" data-max="40" style="background:var(--purple)"></div></div><span class="bv">+30%</span></div>
-      <div class="bar-row"><span class="bl">Revenue growth ($100K→$300K)</span><div class="track"><div class="fill" data-w="40" data-max="40" style="background:var(--orange)"></div></div><span class="bv">+200%</span></div>
-      <p style="font-size:11px;color:var(--muted);margin-top:10px" class="mono">bars scaled independently — 200% clipped to axis, like any honest chart footnote</p>
+      <div class="bar-row"><span class="bl">Client onboarding time (GenAI chatbot)</span><div class="track"><div class="fill" data-w="40" data-max="40" style="background:var(--orange)"></div></div><span class="bv">−40%</span></div>
+      <p style="font-size:11px;color:var(--muted);margin-top:10px" class="mono">bars scaled independently on the same axis — no cherry-picked scales, like any honest chart</p>
     </div>
 
     <!-- SQL console -->
@@ -390,7 +390,6 @@ footer .mono{font-size:11px;margin-top:10px}
           <tr class="proj" data-d="insurance" data-cap="governance,business-analytics"><td><b>Application rationalization</b></td><td><span class="dtag" style="color:var(--blue);border:1px solid var(--blue)">insurance</span></td><td></td><td class="dim">Led lifecycle, usage, cost &amp; compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions</td><td class="dim">Power BI · SQL · Stakeholder analysis</td></tr>
           <tr class="proj" data-d="saas" data-cap="ai-agents,governance,business-analytics"><td><b>GenAI compliance chatbot</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%</td><td class="dim">GenAI / LLM · RAG · Compliance</td></tr>
           <tr class="proj" data-d="saas" data-cap="data-engineering,data-analytics"><td><b>Regulatory dataset restructuring</b></td><td><span class="dtag" style="color:var(--purple);border:1px solid var(--purple)">saas</span></td><td></td><td class="dim">Restructured a 700+ record regulatory licensing dataset with SQL &amp; Python — 40% faster search, 70+ hours of manual analysis saved</td><td class="dim">SQL · Python</td></tr>
-          <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>Pricing &amp; customer segmentation</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">SQL-based pricing analysis and segmentation modeling drove 200% revenue growth ($100K → $300K)</td><td class="dim">SQL · Power BI · Statistics</td></tr>
           <tr class="proj" data-d="finance" data-cap="data-engineering,bi"><td><b>Reporting automation</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Power Query/Power Automate workflows cut manual reporting effort 40% (10→6 hrs/week); SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%</td><td class="dim">Power Query · Power Automate · Power BI</td></tr>
           <tr class="proj" data-d="finance" data-cap="data-analytics,business-analytics"><td><b>A/B testing &amp; engagement</b></td><td><span class="dtag" style="color:var(--green);border:1px solid var(--green)">finance</span></td><td></td><td class="dim">Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months</td><td class="dim">SQL · Power BI · A/B Testing</td></tr>
           <tr class="proj" data-d="iot" data-cap="data-engineering,governance,data-analytics"><td><b>IoT telemetry &amp; data quality</b></td><td><span class="dtag" style="color:var(--orange);border:1px solid var(--orange)">iot</span></td><td></td><td class="dim">Metadata capture &amp; quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35% (~$15K/yr)</td><td class="dim">Tableau · Data quality frameworks</td></tr>
@@ -404,19 +403,19 @@ footer .mono{font-size:11px;margin-top:10px}
       <div class="res-scroll"><table class="res">
         <thead><tr><th>Certification</th><th>Issuer</th><th>Issued</th><th>Focus</th></tr></thead>
         <tbody>
-          <tr><td><b>Snowflake SnowPro Core</b></td><td class="dim">Udemy</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
-          <tr><td><b>Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep</b></td><td class="dim">LinkedIn / Microsoft Press</td><td class="dim">Feb 2026</td><td><span class="ptag"><i style="background:var(--orange)"></i>BI</span></td></tr>
+          <tr><td><b>Snowflake SnowPro Core</b></td><td class="dim">Udemy</td><td class="dim">Apr 2026</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
+          <tr><td><b>Microsoft Fabric Analytics Engineer Associate (DP-600)</b></td><td class="dim">LinkedIn / Microsoft Press</td><td class="dim">Feb 2026</td><td><span class="ptag"><i style="background:var(--orange)"></i>BI</span></td></tr>
           <tr><td><b>Microsoft Azure Data Fundamentals (DP-900) Cert Prep</b></td><td class="dim">LinkedIn / Microsoft Press</td><td class="dim">Jan 2026</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
           <tr><td><b>ETL in Python and SQL</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
           <tr><td><b>Networking Foundations: Networking Basics</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
           <tr><td><b>Python in Excel</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--blue)"></i>Data Analytics</span></td></tr>
-          <tr><td><b>SAP S/4HANA Essential Training</b></td><td class="dim">LinkedIn Learning</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
+          <tr><td><b>SAP S/4HANA Essential Training</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2025</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
           <tr><td><b>Machine Learning with Python: Foundations</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Aug 2024</td><td><span class="ptag"><i style="background:var(--purple)"></i>AI &amp; Agents</span></td></tr>
           <tr><td><b>Data Analytics: Graph Analytics</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jul 2024</td><td><span class="ptag"><i style="background:var(--blue)"></i>Data Analytics</span></td></tr>
           <tr><td><b>Azure Data Factory</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jul 2024</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
           <tr><td><b>Power BI Essential Training</b></td><td class="dim">NASBA</td><td class="dim">Jun 2024</td><td><span class="ptag"><i style="background:var(--orange)"></i>BI</span></td></tr>
           <tr><td><b>Technical Product Management</b> <span class="dim">(PMI &amp; IIBA)</span></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2024</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
-          <tr><td><b>Small Language Models</b></td><td class="dim">LinkedIn Learning</td><td class="dim">—</td><td><span class="ptag"><i style="background:var(--purple)"></i>AI &amp; Agents</span></td></tr>
+          <tr><td><b>Small Language Models</b></td><td class="dim">LinkedIn Learning</td><td class="dim">Jun 2024</td><td><span class="ptag"><i style="background:var(--purple)"></i>AI &amp; Agents</span></td></tr>
           <tr><td><b>Project Management</b></td><td class="dim">Harvard Business Publishing</td><td class="dim">Mar 2023</td><td><span class="ptag"><i style="background:var(--teal)"></i>Business Analytics</span></td></tr>
           <tr><td><b>SQL</b></td><td class="dim">HackerRank</td><td class="dim">Feb 2023</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
           <tr><td><b>SQL</b></td><td class="dim">Sololearn</td><td class="dim">Feb 2023</td><td><span class="ptag"><i style="background:var(--green)"></i>Data Engineering</span></td></tr>
@@ -507,7 +506,7 @@ const CAPS=[
   {k:'data-engineering',label:'Data Engineering',c:'var(--green)',
     bullets:['REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) — 1.5TB+ into Snowflake/SQL Server','ETL/ELT pipeline design — Azure Data Factory, Databricks, dbt, Python/pandas','Reconciliation &amp; deduplication logic across 20M+ configuration items']},
   {k:'data-analytics',label:'Data Analytics',c:'var(--blue)',
-    bullets:['SQL (CTEs, window functions) + Python driving pricing &amp; segmentation — 200% revenue growth','A/B testing &amp; cohort analysis — +30% engagement over 18 months','IoT telemetry analysis — 300+ error patterns surfaced, 22% faster issue ID']},
+    bullets:['SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT','A/B testing &amp; cohort analysis — +30% engagement over 18 months','IoT telemetry analysis — 300+ error patterns surfaced, 22% faster issue ID']},
   {k:'ai-agents',label:'AI &amp; Agents',c:'var(--purple)',
     bullets:['Designed RAG / knowledge-retrieval logic &amp; business rules for a GenAI compliance chatbot — 80+ clients','AI cost &amp; usage monitoring — token-consumption dashboards guiding infra spend','Working knowledge of Responsible AI, NIST AI RMF, EU AI Act; AWS Bedrock']},
   {k:'governance',label:'Governance',c:'var(--pink)',
@@ -609,7 +608,7 @@ applyFilters();
 const DB={
  experience:[
   {role:'Data Analyst',org:'W.R. Berkley (via Stratus)',location:'Jersey City, NJ',industry:'insurance',start_date:'2025-07-01',end_date:'present',highlight:'1.5TB+ data engineered, 20M+ CIs governed, RLS, AI cost dashboards'},
-  {role:'Data Analyst',org:'Technoid',location:'Piscataway, NJ',industry:'finance',start_date:'2024-09-01',end_date:'2025-07-01',highlight:'200% revenue growth, +30% accuracy, -35% turnaround'},
+  {role:'Data Analyst',org:'Technoid',location:'Piscataway, NJ',industry:'finance',start_date:'2024-09-01',end_date:'2025-07-01',highlight:'+30% decision accuracy, -35% reporting turnaround, -40% manual effort'},
   {role:'Data Analyst',org:'Wolters Kluwer',location:'New York, NY',industry:'saas',start_date:'2024-01-01',end_date:'2024-05-01',highlight:'GenAI compliance chatbot - RAG design, 80+ clients'},
   {role:'Data Analyst',org:'Innovatio Hub',location:'Hyderabad, India',industry:'iot',start_date:'2019-12-01',end_date:'2022-11-01',highlight:'IoT telemetry, governance, -40% system errors'}
  ],
@@ -633,25 +632,24 @@ const DB={
   {name:'Application rationalization',industry:'insurance',capabilities:'governance,business-analytics',proves:'Led lifecycle, usage, cost & compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions',stack:'Power BI, SQL, Stakeholder analysis'},
   {name:'GenAI compliance chatbot',industry:'saas',capabilities:'ai-agents,governance,business-analytics',proves:'Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%',stack:'GenAI/LLM, RAG, Compliance'},
   {name:'Regulatory dataset restructuring',industry:'saas',capabilities:'data-engineering,data-analytics',proves:'Restructured a 700+ record regulatory licensing dataset with SQL & Python — 40% faster search, 70+ hours of manual analysis saved',stack:'SQL, Python'},
-  {name:'Pricing & customer segmentation',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'SQL-based pricing analysis and segmentation modeling drove 200% revenue growth ($100K to $300K)',stack:'SQL, Power BI, Statistics'},
   {name:'Reporting automation',industry:'finance',capabilities:'data-engineering,bi',proves:'Power Query/Power Automate workflows cut manual reporting effort 40%; SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%',stack:'Power Query, Power Automate, Power BI'},
   {name:'A/B testing & engagement',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months',stack:'SQL, Power BI, A/B Testing'},
   {name:'IoT telemetry & data quality',industry:'iot',capabilities:'data-engineering,governance,data-analytics',proves:'Metadata capture & quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35%',stack:'Tableau, Data quality frameworks'}
  ],
  certifications:[
-  {name:'Snowflake SnowPro Core',issuer:'Udemy',issued:'—',focus:'Data Engineering'},
+  {name:'Snowflake SnowPro Core',issuer:'Udemy',issued:'2026-04',focus:'Data Engineering'},
   {name:'Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep',issuer:'LinkedIn / Microsoft Press',issued:'2026-02',focus:'BI'},
   {name:'Microsoft Azure Data Fundamentals (DP-900) Cert Prep',issuer:'LinkedIn / Microsoft Press',issued:'2026-01',focus:'Data Engineering'},
   {name:'ETL in Python and SQL',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Engineering'},
   {name:'Networking Foundations: Networking Basics',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Engineering'},
   {name:'Python in Excel',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Analytics'},
-  {name:'SAP S/4HANA Essential Training',issuer:'LinkedIn Learning',issued:'—',focus:'Business Analytics'},
+  {name:'SAP S/4HANA Essential Training',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Business Analytics'},
   {name:'Machine Learning with Python: Foundations',issuer:'LinkedIn Learning',issued:'2024-08',focus:'AI & Agents'},
   {name:'Data Analytics: Graph Analytics',issuer:'LinkedIn Learning',issued:'2024-07',focus:'Data Analytics'},
   {name:'Azure Data Factory',issuer:'LinkedIn Learning',issued:'2024-07',focus:'Data Engineering'},
   {name:'Power BI Essential Training',issuer:'NASBA',issued:'2024-06',focus:'BI'},
   {name:'Technical Product Management (PMI & IIBA)',issuer:'LinkedIn Learning',issued:'2024-06',focus:'Business Analytics'},
-  {name:'Small Language Models',issuer:'LinkedIn Learning',issued:'—',focus:'AI & Agents'},
+  {name:'Small Language Models',issuer:'LinkedIn Learning',issued:'2024-06',focus:'AI & Agents'},
   {name:'Project Management',issuer:'Harvard Business Publishing',issued:'2023-03',focus:'Business Analytics'},
   {name:'SQL',issuer:'HackerRank',issued:'2023-02',focus:'Data Engineering'},
   {name:'SQL',issuer:'Sololearn',issued:'2023-02',focus:'Data Engineering'},
@@ -862,7 +860,7 @@ const KB=[
   ans:'Data engineering side: REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into Snowflake/SQL Server, ETL/ELT pipeline design with Azure Data Factory, Databricks, and dbt, plus reconciliation &amp; dedup logic across 20M+ configuration items.',
   src:'Data Engineer resume'},
  {id:'da',kw:['data analyst','data analytics','a/b test','ab test','segmentation','statistics','forecasting'],
-  ans:'On the analytics side: SQL (CTEs, window functions) + Python driving pricing and segmentation work that grew revenue 200% ($100K → $300K), plus A/B testing that lifted engagement 30% over 18 months.',
+  ans:'On the analytics side: SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT, plus A/B testing that lifted engagement 30% over 18 months.',
   src:'Data Analyst resume'},
  {id:'gov',kw:['governance','lineage','compliance','audit','pii','critical data element','metadata'],
   ans:'Governance is the throughline: an enterprise asset governance model (ownership, lifecycle, data-quality KPIs across 20M+ CIs), row-level security via Azure AD, and data lineage/metadata/PII classification work, with working knowledge of the NIST AI RMF and EU AI Act.',
@@ -883,7 +881,7 @@ const KB=[
   ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI — with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
   src:'why_hire_rahul'},
  {id:'impact',kw:['revenue','impact','results','metrics','numbers','roi'],
-  ans:'Headline numbers: 200% revenue growth ($100K → $300K), 20M+ configuration items governed, 1.5TB+ infrastructure data engineered, 40% cut in manual reporting effort, 35% faster reporting turnaround, and 80+ clients supported by the GenAI chatbot he helped design.'},
+  ans:'Headline numbers: 20M+ configuration items governed, 1.5TB+ infrastructure data engineered, 40% cut in manual reporting effort, 35% faster reporting turnaround, 30% decision accuracy improvement, and 80+ clients supported by the GenAI chatbot he helped design.'},
  {id:'industries',kw:['industry','industries','insurance','finance','saas','iot','domain'],
   ans:'Insurance (W.R. Berkley, a Fortune 500 insurer) · Technoid · SaaS/RegTech (Wolters Kluwer) · IoT (Innovatio Hub, Hyderabad). Weighted by tenure in the Industry Mix donut above.'},
  {id:'greeting',kw:['hi','hello','hey','yo','sup','greetings'],
