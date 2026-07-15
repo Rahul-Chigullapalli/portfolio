@@ -271,17 +271,32 @@ footer .mono{font-size:11px;margin-top:10px}
   opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
 #cov-toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
 @media(max-width:480px){#cov-panel{left:10px;width:calc(100vw - 20px)}#cov-badge{left:16px;bottom:16px}}
+
+/* contact popup */
+#contact-popup{position:fixed;top:66px;right:18px;z-index:180;width:280px;max-width:calc(100vw - 32px);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
+  box-shadow:0 20px 60px rgba(15,23,42,.18);padding:6px 16px;display:none}
+#contact-popup.open{display:block}
+.cp-hd{display:flex;align-items:center;justify-content:space-between;font-size:13px;font-weight:600;padding:10px 0}
+.cp-hd button{background:none;border:none;color:var(--muted);font-size:15px;padding:2px 6px;border-radius:6px;cursor:pointer}
+.cp-hd button:hover{color:var(--text);background:var(--panel-2)}
+.cp-row{display:block;padding:9px 0;border-top:1px solid var(--line)}
+.cp-row .cp-label{display:block;font-family:'JetBrains Mono',monospace;font-size:9.5px;color:var(--muted);
+  text-transform:uppercase;letter-spacing:.08em;margin-bottom:2px}
+.cp-row .cp-value{font-size:13.5px;color:var(--orange);font-weight:500}
+.cp-row:hover .cp-value{text-decoration:underline}
+@media(max-width:480px){#contact-popup{right:10px;left:10px;width:auto;top:64px}}
 </style>
 </head>
 <body>
 
 <div id="top"><div class="wrap top-in">
-  <span class="brand">RAHUL<b>/ANALYTICS</b></span>
+  <span class="brand">RAHUL<b>/AI & Data</b></span>
   <span class="live"><i></i>live · refreshed just now</span>
   <div class="top-actions">
     <button class="tbtn" id="res-open">▤ Resume</button>
-    <a class="tbtn" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">in↗</a>
-    <a class="tbtn primary" href="mailto:chigullapallirahul@gmail.com">Contact</a>
+    <a class="tbtn" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">LinkedIn↗</a>
+    <button class="tbtn primary" id="contact-open">Contact</button>
   </div>
 </div></div>
 
@@ -457,6 +472,20 @@ footer .mono{font-size:11px;margin-top:10px}
   <div id="cov-list"></div>
 </div>
 <div id="cov-toast"></div>
+
+<!-- contact popup -->
+<div id="contact-popup" role="dialog" aria-label="Contact">
+  <div class="cp-hd">Get in touch<button id="contact-close" aria-label="Close contact popup">✕</button></div>
+  <a class="cp-row" href="mailto:chigullapallirahul@gmail.com">
+    <span class="cp-label">Email</span><span class="cp-value">chigullapallirahul@gmail.com</span>
+  </a>
+  <a class="cp-row" href="tel:+12014235266">
+    <span class="cp-label">Phone</span><span class="cp-value">(201) 423-5266</span>
+  </a>
+  <a class="cp-row" href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">
+    <span class="cp-label">LinkedIn</span><span class="cp-value">linkedin.com/in/rahul-chigullapalli</span>
+  </a>
+</div>
 
 <!-- ask-Rahul chatbot -->
 <button id="chat-fab" aria-label="Ask about Rahul" title="Ask about Rahul">
@@ -781,6 +810,21 @@ $('#res-open').addEventListener('click',()=>{openRes(true);markVisited('resume')
 $('#res-close').addEventListener('click',()=>openRes(false));
 res.addEventListener('click',e=>{if(e.target===res)openRes(false)});
 addEventListener('keydown',e=>{if(e.key==='Escape')openRes(false)});
+
+/* contact popup */
+const contactPopup=$('#contact-popup');
+function closeContact(){contactPopup.classList.remove('open')}
+$('#contact-open').addEventListener('click',e=>{
+  e.stopPropagation();
+  contactPopup.classList.toggle('open');
+});
+$('#contact-close').addEventListener('click',closeContact);
+document.addEventListener('click',e=>{
+  if(contactPopup.classList.contains('open')&&!contactPopup.contains(e.target)&&e.target.id!=='contact-open'){
+    closeContact();
+  }
+});
+addEventListener('keydown',e=>{if(e.key==='Escape')closeContact()});
 
 $('#res-dl').addEventListener('click',()=>{
   const a=document.createElement('a');
