@@ -3,25 +3,25 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>RAHUL/ANALYTICS — Career Intelligence Dashboard</title>
+<title>Rahul Chigullapalli</title>
 <meta name="description" content="Rahul Chigullapalli as a dataset: data engineering, data & business analytics, AI/agents, governance, and BI — query the career of a professional who ships across all of it.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;600;800&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#0C1017;
-  --panel:#131A24;
-  --panel-2:#182130;
-  --line:rgba(148,178,224,.12);
-  --text:#E9EFF9;
-  --muted:#9FB2CD;
-  --blue:#58A6FF;
-  --green:#3FB950;
-  --orange:#F0883E;
-  --purple:#BC8CFF;
-  --pink:#FF7B9C;
-  --teal:#39C5CF;
+  --bg:#F4F6FA;
+  --panel:#FFFFFF;
+  --panel-2:#EEF2F8;
+  --line:rgba(15,35,65,.12);
+  --text:#101828;
+  --muted:#5B6B85;
+  --blue:#2563EB;
+  --green:#15803D;
+  --orange:#C2570C;
+  --purple:#7C3AED;
+  --pink:#DB2777;
+  --teal:#0F8B8D;
   --r:12px;
 }
 *{margin:0;padding:0;box-sizing:border-box}
@@ -36,7 +36,7 @@ button{font-family:inherit;cursor:pointer}
 .wrap{max-width:1240px;margin:0 auto;padding:0 18px}
 
 /* topbar */
-#top{position:sticky;top:0;z-index:60;background:rgba(12,16,23,.85);backdrop-filter:blur(12px);
+#top{position:sticky;top:0;z-index:60;background:rgba(244,246,250,.85);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line)}
 .top-in{display:flex;align-items:center;gap:16px;height:58px}
 .brand{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
@@ -115,7 +115,7 @@ button{font-family:inherit;cursor:pointer}
 .donut-c .center span{font-size:9.5px;color:var(--muted);letter-spacing:.1em}
 
 /* SQL console */
-#sqlpanel{background:#0A0E15}
+#sqlpanel{background:#EAEFF7}
 .sql-box{font-family:'JetBrains Mono',monospace;font-size:12.5px}
 .sql-q{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:12px}
 .q-chip{font-family:'JetBrains Mono',monospace;font-size:11px;padding:6px 12px;border-radius:8px;
@@ -124,11 +124,21 @@ button{font-family:inherit;cursor:pointer}
 .sql-code{background:var(--panel);border:1px solid var(--line);border-radius:9px;
   padding:12px 14px;color:var(--muted);white-space:pre-wrap;margin-bottom:8px}
 .sql-code .kw{color:var(--purple)}.sql-code .tb{color:var(--orange)}.sql-code .st{color:var(--green)}
-.run-row{display:flex;align-items:center;gap:12px;margin-bottom:12px}
+textarea.sql-input{width:100%;background:var(--panel);border:1px solid var(--line);border-radius:9px;
+  padding:12px 14px;color:var(--text);font-family:'JetBrains Mono',monospace;font-size:12.5px;
+  line-height:1.5;resize:vertical;min-height:64px;margin-bottom:6px}
+textarea.sql-input:focus{outline:none;border-color:var(--blue)}
+.sql-hint{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted);margin-bottom:12px}
+.sql-hint b{color:var(--text)}
+.run-row{display:flex;align-items:center;flex-wrap:wrap;gap:12px;margin-bottom:12px}
 .run{background:var(--green);color:#04160A;border:none;border-radius:8px;font-weight:700;
   font-family:'JetBrains Mono',monospace;font-size:12px;padding:9px 20px}
 .run:hover{filter:brightness(1.1)}
 .exec-meta{font-family:'JetBrains Mono',monospace;font-size:10.5px;color:var(--muted)}
+.exec-meta.err{color:var(--pink)}
+.sql-error{font-family:'JetBrains Mono',monospace;font-size:12px;color:var(--pink);
+  background:rgba(219,39,119,.06);border:1px solid rgba(219,39,119,.35);border-radius:8px;
+  padding:10px 13px;margin-bottom:8px}
 table.res{width:100%;border-collapse:collapse;font-family:'JetBrains Mono',monospace;font-size:12px}
 table.res th{text-align:left;color:var(--blue);font-weight:500;padding:9px 10px;
   border-bottom:1px solid var(--line);font-size:11px;text-transform:uppercase;letter-spacing:.08em}
@@ -141,7 +151,7 @@ table.res td.dim{color:var(--muted)}
 .cap-card{background:var(--panel-2);border:1px solid var(--line);border-radius:10px;padding:15px 16px;
   text-align:left;color:var(--text);transition:.2s;cursor:pointer}
 .cap-card:hover{border-color:var(--cap-c,var(--blue));transform:translateY(-2px)}
-.cap-card.active{border-color:var(--cap-c,var(--blue));background:rgba(88,166,255,.08)}
+.cap-card.active{border-color:var(--cap-c,var(--blue));background:rgba(37,99,235,.06)}
 .cap-card h3{display:flex;align-items:center;gap:8px;font-size:14px;font-weight:600;margin-bottom:9px}
 .cap-card h3 i{width:9px;height:9px;border-radius:3px;background:var(--cap-c,var(--blue));flex:none}
 .cap-card ul{list-style:none;font-size:13px;line-height:1.5;color:var(--muted);display:grid;gap:7px}
@@ -200,14 +210,14 @@ footer .mono{font-size:11px;margin-top:10px}
 
 /* chat widget */
 #chat-fab{position:fixed;right:22px;bottom:22px;z-index:150;width:56px;height:56px;border-radius:50%;
-  background:var(--blue);color:#04121F;border:none;box-shadow:0 8px 24px rgba(0,0,0,.45);
+  background:var(--blue);color:#04121F;border:none;box-shadow:0 8px 24px rgba(15,23,42,.16);
   display:flex;align-items:center;justify-content:center;transition:.2s}
 #chat-fab:hover{filter:brightness(1.1);transform:translateY(-2px)}
 #chat-fab .fdot{position:absolute;top:2px;right:2px;width:11px;height:11px;border-radius:50%;background:var(--green);
   border:2px solid var(--bg);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite}
 #chat-panel{position:fixed;right:22px;bottom:90px;z-index:150;width:min(380px,calc(100vw - 32px));
   height:min(560px,calc(100vh - 130px));background:var(--panel);border:1px solid var(--line);border-radius:var(--r);
-  box-shadow:0 20px 60px rgba(0,0,0,.5);display:none;flex-direction:column;overflow:hidden}
+  box-shadow:0 20px 60px rgba(15,23,42,.18);display:none;flex-direction:column;overflow:hidden}
 #chat-panel.open{display:flex}
 .chat-hd{display:flex;align-items:center;gap:9px;padding:14px 16px;border-bottom:1px solid var(--line);background:var(--panel-2);flex:none}
 .chat-hd i{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 6px var(--green);animation:pulse 2s infinite;flex:none}
@@ -239,13 +249,13 @@ footer .mono{font-size:11px;margin-top:10px}
 /* profile coverage widget */
 #cov-badge{position:fixed;left:22px;bottom:22px;z-index:150;width:56px;height:56px;border-radius:50%;
   background:var(--panel);border:1px solid var(--line);cursor:pointer;position:fixed;display:flex;
-  align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(0,0,0,.45);transition:.2s;overflow:hidden}
+  align-items:center;justify-content:center;box-shadow:0 8px 24px rgba(15,23,42,.16);transition:.2s;overflow:hidden}
 #cov-badge:hover{border-color:var(--green);transform:translateY(-2px)}
 #cov-badge .ring{position:absolute;inset:0;border-radius:50%;background:conic-gradient(var(--green) 0%,var(--panel-2) 0)}
 #cov-badge .ring::after{content:'';position:absolute;inset:6px;border-radius:50%;background:var(--panel)}
 #cov-badge .pct{position:relative;font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:var(--text)}
 #cov-panel{position:fixed;left:22px;bottom:90px;z-index:150;width:280px;max-width:calc(100vw - 32px);
-  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 60px rgba(0,0,0,.5);
+  background:var(--panel);border:1px solid var(--line);border-radius:var(--r);box-shadow:0 20px 60px rgba(15,23,42,.18);
   padding:15px 17px;display:none}
 #cov-panel.open{display:block}
 .cov-hd{font-size:13px;font-weight:600;margin-bottom:2px}
@@ -256,7 +266,7 @@ footer .mono{font-size:11px;margin-top:10px}
   justify-content:center;font-size:10px;flex:none;transition:.2s}
 .cov-item.done .chk{background:var(--green);border-color:var(--green);color:#04160A}
 #cov-toast{position:fixed;left:50%;bottom:24px;transform:translate(-50%,140%);z-index:170;background:var(--panel);
-  border:1px solid var(--green);border-radius:var(--r);padding:16px 22px;box-shadow:0 20px 60px rgba(0,0,0,.55);
+  border:1px solid var(--green);border-radius:var(--r);padding:16px 22px;box-shadow:0 20px 60px rgba(15,23,42,.2);
   font-size:13.5px;line-height:1.55;max-width:min(460px,90vw);
   opacity:0;pointer-events:none;transition:transform .5s cubic-bezier(.2,.8,.2,1),opacity .5s}
 #cov-toast.show{transform:translate(-50%,0);opacity:1;pointer-events:auto}
@@ -292,7 +302,7 @@ footer .mono{font-size:11px;margin-top:10px}
 
     <!-- KPI row -->
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="5">0</span>+</div><div class="l">years in data</div><div class="delta up">▲ still compounding</div>
-      <svg width="70" height="26" viewBox="0 0 70 26"><polyline points="0,22 12,18 24,19 36,13 48,10 60,6 70,2" fill="none" stroke="#3FB950" stroke-width="2"/></svg></div>
+      <svg width="70" height="26" viewBox="0 0 70 26"><polyline points="0,22 12,18 24,19 36,13 48,10 60,6 70,2" fill="none" stroke="#15803D" stroke-width="2"/></svg></div>
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="20">0</span>M+</div><div class="l">config items governed</div><div class="delta up">▲ enterprise CMDB · W.R. Berkley</div></div>
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="1.5">0</span>TB+</div><div class="l">infra data engineered</div><div class="delta up">▲ REST APIs → Snowflake/SQL Server</div></div>
     <div class="panel c3 kpi reveal"><div class="n"><span class="count" data-to="200">0</span>%</div><div class="l">revenue growth supported</div><div class="delta up">▲ $100K → $300K · pricing &amp; segmentation</div></div>
@@ -349,18 +359,21 @@ footer .mono{font-size:11px;margin-top:10px}
 
     <!-- SQL console -->
     <div class="panel c12 reveal" id="sqlpanel">
-      <div class="ph"><h2>SQL console — query the candidate</h2><span class="src">read-only · governed · rls: public</span></div>
+      <div class="ph"><h2>SQL console — query the candidate</h2><span class="src">read-only · SELECT only · runs in your browser</span></div>
       <div class="sql-box">
         <div class="sql-q">
           <button class="q-chip active" data-q="exp">experience</button>
           <button class="q-chip" data-q="skills">skills</button>
           <button class="q-chip" data-q="projects">projects</button>
           <button class="q-chip" data-q="certs">certifications</button>
+          <button class="q-chip" data-q="edu">education</button>
           <button class="q-chip" data-q="why">why_hire_rahul</button>
           <button class="q-chip" data-q="contact">contact</button>
         </div>
-        <div class="sql-code" id="sqlcode"></div>
+        <textarea class="sql-input" id="sqlcode" spellcheck="false"></textarea>
+        <div class="sql-hint">tables: <b>experience · skills · projects · certifications · education · contact · why_hire_rahul</b> — this really executes, try editing it</div>
         <div class="run-row"><button class="run" id="runbtn">▶ RUN</button><span class="exec-meta" id="execmeta"></span></div>
+        <div id="sqlerr"></div>
         <div class="res-scroll"><table class="res"><thead id="rhead"></thead><tbody id="rbody"></tbody></table></div>
       </div>
     </div>
@@ -429,7 +442,7 @@ footer .mono{font-size:11px;margin-top:10px}
       <button id="res-close">✕ Close</button>
     </div>
     <div id="res-pdf-view">
-      <iframe id="res-pdf-frame" title="Resume PDF" src="resume.pdf"></iframe>
+      <iframe id="res-pdf-frame" title="Resume PDF" src="resume.pdf#toolbar=0&navpanes=0&statusbar=0&view=FitH"></iframe>
     </div>
   </div>
 </div>
@@ -523,7 +536,7 @@ $$('#projbody .proj').forEach(r=>{
 const capchips=$('#capchips');
 const capAllBtn=document.createElement('button');
 capAllBtn.className='cap-chip active';capAllBtn.dataset.cap='';
-capAllBtn.innerHTML='<i style="background:#8CA0BE"></i>All';
+capAllBtn.innerHTML='<i style="background:#64748B"></i>All';
 capAllBtn.addEventListener('click',()=>filterCap(null));
 capchips.appendChild(capAllBtn);
 CAPS.forEach(cp=>{
@@ -543,10 +556,10 @@ function filterCap(k){
 
 /* donut with cross-filter */
 const domains=[
-  {d:'iot',v:56,c:'#F0883E'},
-  {d:'insurance',v:20,c:'#58A6FF'},
-  {d:'finance',v:16,c:'#3FB950'},
-  {d:'saas',v:8,c:'#BC8CFF'}];
+  {d:'iot',v:56,c:'#C2570C'},
+  {d:'insurance',v:20,c:'#2563EB'},
+  {d:'finance',v:16,c:'#15803D'},
+  {d:'saas',v:8,c:'#7C3AED'}];
 const svg=$('#donut'),R=52,C=2*Math.PI*R;let acc=0;
 domains.forEach(o=>{
   const el=document.createElementNS('http://www.w3.org/2000/svg','circle');
@@ -562,7 +575,7 @@ domains.forEach(o=>{
 const leg=$('#legend');
 const allBtn=document.createElement('button');
 allBtn.className='active';allBtn.dataset.d='';
-allBtn.innerHTML='<i style="background:#8CA0BE"></i>show all';
+allBtn.innerHTML='<i style="background:#64748B"></i>show all';
 allBtn.addEventListener('click',()=>filterProj(null));
 leg.appendChild(allBtn);
 domains.forEach(o=>{
@@ -592,78 +605,176 @@ function applyFilters(){
 }
 applyFilters();
 
-/* SQL console */
-const Q={
-exp:{sql:`<span class="kw">SELECT</span> role, org, dates, highlight\n<span class="kw">FROM</span> <span class="tb">experience</span>\n<span class="kw">ORDER BY</span> start_dt <span class="kw">DESC</span>;`,
- head:['role','org','dates','highlight'],
- rows:[['Data Analyst','W.R. Berkley (via Stratus)','Jul 2025 – Present','1.5TB+ data engineered · 20M+ CIs governed · RLS · AI cost dashboards'],
- ['Data Analyst','Technoid','Sep 2024 – Jul 2025','200% revenue growth · +30% accuracy · −35% turnaround'],
- ['Data Analyst','Wolters Kluwer','Jan 2024 – May 2024','GenAI compliance chatbot — RAG design, 80+ clients'],
- ['MS Information Systems','Stevens Institute of Technology','Jan 2023 – May 2024','Hoboken, NJ'],
- ['Data Analyst','Innovatio Hub','Dec 2019 – Nov 2022','IoT telemetry · governance · −40% system errors']]},
-skills:{sql:`<span class="kw">SELECT</span> capability, tools\n<span class="kw">FROM</span> <span class="tb">skills</span>;`,
- head:['capability','tools'],
- rows:[['data engineering','Snowflake · Azure pipelines · Python/SQL automation · CMDB data modeling'],
- ['data analytics','SQL · statistics · A/B & incrementality testing · trend analysis'],
- ['ai & agents','GenAI/LLM · RAG · agentic workflows · AWS Bedrock'],
- ['governance','Row-level security · Azure AD · lineage · ServiceNow CMDB'],
- ['business intelligence','Power BI · DAX · executive dashboards'],
- ['business analytics','Stakeholder requirements · process analysis · decision support'],
- ['security','Tenable']]},
-projects:{sql:`<span class="kw">SELECT</span> name, proves\n<span class="kw">FROM</span> <span class="tb">projects</span>\n<span class="kw">WHERE</span> shipped = <span class="st">true</span>;`,
- head:['name','proves'],
- rows:[['Enterprise CMDB & asset governance','1.5TB+ engineered, 20M+ CIs reconciled — a source of truth leadership trusts'],
- ['Power BI RLS & AI cost dashboards','access governance that scales with the org chart, via Azure AD'],
- ['GenAI compliance chatbot','AI ships in regulated domains — RAG + governance designed in, 80+ clients'],
- ['Pricing & customer segmentation','200% revenue growth ($100K → $300K)'],
- ['Reporting automation','manual effort cut 40% with Power Query / Power Automate'],
- ['IoT telemetry & data quality','300+ error patterns surfaced, 35% lower energy use']]},
-certs:{sql:`<span class="kw">SELECT</span> name, issuer, issued\n<span class="kw">FROM</span> <span class="tb">certifications</span>\n<span class="kw">ORDER BY</span> issued <span class="kw">DESC</span>;`,
- head:['name','issuer','issued'],
- rows:[['Snowflake SnowPro Core','Udemy','—'],
- ['Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep','LinkedIn / Microsoft Press','Feb 2026'],
- ['Microsoft Azure Data Fundamentals (DP-900) Cert Prep','LinkedIn / Microsoft Press','Jan 2026'],
- ['ETL in Python and SQL','LinkedIn Learning','Jun 2025'],
- ['Networking Foundations: Networking Basics','LinkedIn Learning','Jun 2025'],
- ['Python in Excel','LinkedIn Learning','Jun 2025'],
- ['SAP S/4HANA Essential Training','LinkedIn Learning','—'],
- ['Machine Learning with Python: Foundations','LinkedIn Learning','Aug 2024'],
- ['Data Analytics: Graph Analytics','LinkedIn Learning','Jul 2024'],
- ['Azure Data Factory','LinkedIn Learning','Jul 2024'],
- ['Power BI Essential Training','NASBA','Jun 2024'],
- ['Technical Product Management (PMI & IIBA)','LinkedIn Learning','Jun 2024'],
- ['Small Language Models','LinkedIn Learning','—'],
- ['Project Management','Harvard Business Publishing','Mar 2023'],
- ['SQL','HackerRank','Feb 2023'],
- ['SQL','Sololearn','Feb 2023'],
- ['Python','Kaggle','Feb 2023']]},
-why:{sql:`<span class="kw">SELECT</span> reason\n<span class="kw">FROM</span> <span class="tb">why_hire_rahul</span>\n<span class="kw">LIMIT</span> 6;`,
- head:['reason'],
- rows:[['Full-stack data: builds the pipeline (DE), the dashboard (BI), and the model behind the AI'],
- ['Governance-first: the layer that makes analytics and AI outputs defensible, not just impressive'],
- ['Proof over adjectives: RLS demo, metrics, and this dashboard are all working artifacts'],
- ['Bridges technical and business: stakeholder requirements → shipped analytics, not just SQL'],
- ['Cross-domain: insurance, finance, SaaS, IoT — pattern recognition across regulated industries'],
- ['Ships without frameworks: this entire dashboard is one hand-rolled HTML file']]},
-contact:{sql:`<span class="kw">SELECT</span> channel, value\n<span class="kw">FROM</span> <span class="tb">contact</span>;`,
- head:['channel','value'],
- rows:[['email','<a href="mailto:chigullapallirahul@gmail.com">chigullapallirahul@gmail.com</a>'],
- ['phone','(201) 423-5266'],
- ['linkedin','<a href="https://www.linkedin.com/in/rahul-chigullapalli/" target="_blank" rel="noopener">linkedin.com/in/rahul-chigullapalli</a>'],
- ['base','Jersey City, NJ · open to relocation']]}};
-let curQ='exp';
-function setQ(k){curQ=k;
+/* ===== SQL console — a real, hand-rolled SELECT engine over real data ===== */
+const DB={
+ experience:[
+  {role:'Data Analyst',org:'W.R. Berkley (via Stratus)',location:'Jersey City, NJ',industry:'insurance',start_date:'2025-07-01',end_date:'present',highlight:'1.5TB+ data engineered, 20M+ CIs governed, RLS, AI cost dashboards'},
+  {role:'Data Analyst',org:'Technoid',location:'Piscataway, NJ',industry:'finance',start_date:'2024-09-01',end_date:'2025-07-01',highlight:'200% revenue growth, +30% accuracy, -35% turnaround'},
+  {role:'Data Analyst',org:'Wolters Kluwer',location:'New York, NY',industry:'saas',start_date:'2024-01-01',end_date:'2024-05-01',highlight:'GenAI compliance chatbot - RAG design, 80+ clients'},
+  {role:'Data Analyst',org:'Innovatio Hub',location:'Hyderabad, India',industry:'iot',start_date:'2019-12-01',end_date:'2022-11-01',highlight:'IoT telemetry, governance, -40% system errors'}
+ ],
+ education:[
+  {degree:'MS, Information Systems',school:'Stevens Institute of Technology',location:'Hoboken, NJ',start_date:'2023-01-01',end_date:'2024-05-01'},
+  {degree:'BS, Mechanical Engineering',school:'Jawaharlal Nehru Technological University',location:'Hyderabad, India',start_date:'2018-07-01',end_date:'2022-08-01'}
+ ],
+ skills:[
+  {capability:'data-engineering',tool:'SQL',proficiency:95},
+  {capability:'bi',tool:'Power BI · DAX',proficiency:92},
+  {capability:'governance',tool:'ServiceNow CMDB',proficiency:88},
+  {capability:'data-engineering',tool:'Snowflake & pipelines',proficiency:86},
+  {capability:'business-analytics',tool:'Stakeholder & BA',proficiency:85},
+  {capability:'data-engineering',tool:'Python automation',proficiency:84},
+  {capability:'governance',tool:'Azure · Azure AD',proficiency:82},
+  {capability:'ai-agents',tool:'GenAI / RAG / Agents',proficiency:76}
+ ],
+ projects:[
+  {name:'Enterprise CMDB & asset governance',industry:'insurance',capabilities:'governance,data-engineering',proves:'REST API integrations (ServiceNow CMDB, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into analytics-ready datasets; reconciliation & dedup across 20M+ CIs',stack:'ServiceNow CMDB, Python, SQL, REST APIs'},
+  {name:'Power BI RLS & AI cost dashboards',industry:'insurance',capabilities:'governance,bi',proves:'USERPRINCIPALNAME() DAX row-level security via an org-wide Azure AD group; AI token-consumption dashboards over Azure Cost Management & Cosmos DB',stack:'Power BI, DAX, Azure AD'},
+  {name:'Application rationalization',industry:'insurance',capabilities:'governance,business-analytics',proves:'Led lifecycle, usage, cost & compliance rationalization with infrastructure and security leaders, informing modernization and retirement decisions',stack:'Power BI, SQL, Stakeholder analysis'},
+  {name:'GenAI compliance chatbot',industry:'saas',capabilities:'ai-agents,governance,business-analytics',proves:'Led stakeholder discovery to architect RAG/knowledge-retrieval logic and business rules — now supporting 80+ clients annually; cut client onboarding time 40%',stack:'GenAI/LLM, RAG, Compliance'},
+  {name:'Regulatory dataset restructuring',industry:'saas',capabilities:'data-engineering,data-analytics',proves:'Restructured a 700+ record regulatory licensing dataset with SQL & Python — 40% faster search, 70+ hours of manual analysis saved',stack:'SQL, Python'},
+  {name:'Pricing & customer segmentation',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'SQL-based pricing analysis and segmentation modeling drove 200% revenue growth ($100K to $300K)',stack:'SQL, Power BI, Statistics'},
+  {name:'Reporting automation',industry:'finance',capabilities:'data-engineering,bi',proves:'Power Query/Power Automate workflows cut manual reporting effort 40%; SQL-driven Power BI dashboards lifted decision accuracy 30%, cut turnaround 35%',stack:'Power Query, Power Automate, Power BI'},
+  {name:'A/B testing & engagement',industry:'finance',capabilities:'data-analytics,business-analytics',proves:'Designed and analyzed A/B tests across marketing channels — +30% customer engagement over 18 months',stack:'SQL, Power BI, A/B Testing'},
+  {name:'IoT telemetry & data quality',industry:'iot',capabilities:'data-engineering,governance,data-analytics',proves:'Metadata capture & quality-control frameworks cut system errors 40%; 300+ error patterns visualized in Tableau (22% faster issue ID); KPI dashboards cut energy use 35%',stack:'Tableau, Data quality frameworks'}
+ ],
+ certifications:[
+  {name:'Snowflake SnowPro Core',issuer:'Udemy',issued:'—',focus:'Data Engineering'},
+  {name:'Microsoft Fabric Analytics Engineer Associate (DP-600) Cert Prep',issuer:'LinkedIn / Microsoft Press',issued:'2026-02',focus:'BI'},
+  {name:'Microsoft Azure Data Fundamentals (DP-900) Cert Prep',issuer:'LinkedIn / Microsoft Press',issued:'2026-01',focus:'Data Engineering'},
+  {name:'ETL in Python and SQL',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Engineering'},
+  {name:'Networking Foundations: Networking Basics',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Engineering'},
+  {name:'Python in Excel',issuer:'LinkedIn Learning',issued:'2025-06',focus:'Data Analytics'},
+  {name:'SAP S/4HANA Essential Training',issuer:'LinkedIn Learning',issued:'—',focus:'Business Analytics'},
+  {name:'Machine Learning with Python: Foundations',issuer:'LinkedIn Learning',issued:'2024-08',focus:'AI & Agents'},
+  {name:'Data Analytics: Graph Analytics',issuer:'LinkedIn Learning',issued:'2024-07',focus:'Data Analytics'},
+  {name:'Azure Data Factory',issuer:'LinkedIn Learning',issued:'2024-07',focus:'Data Engineering'},
+  {name:'Power BI Essential Training',issuer:'NASBA',issued:'2024-06',focus:'BI'},
+  {name:'Technical Product Management (PMI & IIBA)',issuer:'LinkedIn Learning',issued:'2024-06',focus:'Business Analytics'},
+  {name:'Small Language Models',issuer:'LinkedIn Learning',issued:'—',focus:'AI & Agents'},
+  {name:'Project Management',issuer:'Harvard Business Publishing',issued:'2023-03',focus:'Business Analytics'},
+  {name:'SQL',issuer:'HackerRank',issued:'2023-02',focus:'Data Engineering'},
+  {name:'SQL',issuer:'Sololearn',issued:'2023-02',focus:'Data Engineering'},
+  {name:'Python',issuer:'Kaggle',issued:'2023-02',focus:'Data Analytics'}
+ ],
+ contact:[
+  {channel:'email',value:'chigullapallirahul@gmail.com'},
+  {channel:'phone',value:'(201) 423-5266'},
+  {channel:'linkedin',value:'linkedin.com/in/rahul-chigullapalli'},
+  {channel:'location',value:'Jersey City, NJ - open to relocation'}
+ ],
+ why_hire_rahul:[
+  {reason:'Full-stack data: builds the pipeline (DE), the dashboard (BI), and the model behind the AI'},
+  {reason:'Governance-first: the layer that makes analytics and AI outputs defensible, not just impressive'},
+  {reason:'Proof over adjectives: RLS demo, metrics, and this dashboard are all working artifacts'},
+  {reason:'Bridges technical and business: stakeholder requirements to shipped analytics, not just SQL'},
+  {reason:'Cross-domain: insurance, finance, SaaS, IoT - pattern recognition across regulated industries'},
+  {reason:'Ships without frameworks: this entire dashboard is one hand-rolled HTML file'}
+ ]
+};
+function sqlParseValue(raw){
+  raw=raw.trim();
+  if(/^'([^']*)'$/.test(raw))return raw.slice(1,-1);
+  if(/^"([^"]*)"$/.test(raw))return raw.slice(1,-1);
+  if(/^-?\d+(\.\d+)?$/.test(raw))return parseFloat(raw);
+  return raw;
+}
+function sqlLikeToRegex(pattern){
+  const esc=pattern.replace(/[.*+?^${}()|[\]\\]/g,'\\$&');
+  return new RegExp('^'+esc.replace(/%/g,'.*').replace(/_/g,'.')+'$','i');
+}
+function sqlEvalCondition(row,cond){
+  const m=cond.match(/^\s*(\w+)\s*(!=|<>|>=|<=|=|>|<|LIKE)\s*(.+?)\s*$/i);
+  if(!m)throw new Error(`Can't parse condition: "${cond.trim()}"`);
+  const col=m[1],op=m[2].toUpperCase(),valRaw=m[3];
+  if(!(col in row))throw new Error(`Unknown column "${col}"`);
+  const cell=row[col];
+  if(op==='LIKE')return sqlLikeToRegex(String(sqlParseValue(valRaw))).test(String(cell));
+  const val=sqlParseValue(valRaw);
+  switch(op){
+    case '=':return cell==val;
+    case '!=':case '<>':return cell!=val;
+    case '>':return cell>val;
+    case '<':return cell<val;
+    case '>=':return cell>=val;
+    case '<=':return cell<=val;
+  }
+}
+function runSQL(raw){
+  const query=raw.trim().replace(/;\s*$/,'');
+  if(!query)throw new Error('Empty query.');
+  if(/^(insert|update|delete|drop|alter|create|truncate)\b/i.test(query))
+    throw new Error('This console is read-only (fitting, for a governance guy) — try a SELECT query.');
+  const m=query.match(/^SELECT\s+(.+?)\s+FROM\s+([a-zA-Z_]\w*)(?:\s+WHERE\s+(.+?))?(?:\s+ORDER\s+BY\s+(.+?))?(?:\s+LIMIT\s+(\d+))?$/is);
+  if(!m)throw new Error('Only SELECT cols FROM table [WHERE ...] [ORDER BY ...] [LIMIT n] is supported.');
+  const [,colsRaw,tableRaw,whereRaw,orderRaw,limitRaw]=m;
+  const tableName=tableRaw.toLowerCase();
+  const table=DB[tableName];
+  if(!table)throw new Error(`Unknown table "${tableRaw}". Try: ${Object.keys(DB).join(', ')}`);
+  let rows=table.slice();
+  if(whereRaw){
+    const conds=whereRaw.split(/\s+AND\s+/i);
+    rows=rows.filter(r=>conds.every(c=>sqlEvalCondition(r,c)));
+  }
+  if(orderRaw){
+    const om=orderRaw.trim().match(/^(\w+)(?:\s+(ASC|DESC))?$/i);
+    if(!om)throw new Error(`Can't parse ORDER BY: "${orderRaw}"`);
+    const ocol=om[1];
+    if(table[0]&&!(ocol in table[0]))throw new Error(`Unknown column "${ocol}"`);
+    const dir=(om[2]||'ASC').toUpperCase()==='DESC'?-1:1;
+    rows.sort((a,b)=>a[ocol]>b[ocol]?dir:a[ocol]<b[ocol]?-dir:0);
+  }
+  if(limitRaw)rows=rows.slice(0,parseInt(limitRaw,10));
+  const cols=colsRaw.trim()==='*'?Object.keys(table[0]||{}):colsRaw.split(',').map(c=>c.trim());
+  cols.forEach(c=>{if(table[0]&&!(c in table[0]))throw new Error(`Unknown column "${c}" in table "${tableName}"`);});
+  return {head:cols,rows:rows.map(r=>cols.map(c=>r[c]))};
+}
+const SQL_EXAMPLES={
+ exp:"SELECT role, org, start_date, end_date, highlight\nFROM experience\nORDER BY start_date DESC;",
+ skills:"SELECT capability, tool, proficiency\nFROM skills\nORDER BY proficiency DESC;",
+ projects:"SELECT name, industry, proves\nFROM projects\nWHERE industry = 'insurance';",
+ certs:"SELECT name, issuer, issued\nFROM certifications\nORDER BY issued DESC\nLIMIT 6;",
+ edu:"SELECT degree, school, location\nFROM education;",
+ why:"SELECT reason FROM why_hire_rahul;",
+ contact:"SELECT channel, value FROM contact;"
+};
+let activeChip='exp';
+function setQ(k){
+  activeChip=k;
   $$('.q-chip').forEach(c=>c.classList.toggle('active',c.dataset.q===k));
-  $('#sqlcode').innerHTML=Q[k].sql;
-  $('#rhead').innerHTML='';$('#rbody').innerHTML='';$('#execmeta').textContent='';}
-function runQ(){
-  const q=Q[curQ];
-  $('#rhead').innerHTML='<tr>'+q.head.map(h=>`<th>${h}</th>`).join('')+'</tr>';
-  $('#rbody').innerHTML=q.rows.map(r=>'<tr>'+r.map((c,i)=>`<td class="${i?'dim':''}">${c}</td>`).join('')+'</tr>').join('');
-  $('#execmeta').textContent=`${q.rows.length} rows · ${(Math.random()*40+8|0)} ms · lineage: verified`;}
-$$('.q-chip').forEach(c=>c.addEventListener('click',()=>{setQ(c.dataset.q);runQ()}));
-$('#runbtn').addEventListener('click',()=>{runQ();markVisited('sql')});
-setQ('exp');runQ();
+  $('#sqlcode').value=SQL_EXAMPLES[k];
+}
+function renderResults(head,rows){
+  $('#rhead').innerHTML='<tr>'+head.map(h=>`<th>${h}</th>`).join('')+'</tr>';
+  $('#rbody').innerHTML=rows.length
+    ?rows.map(r=>'<tr>'+r.map((c,i)=>`<td class="${i?'dim':''}">${c===undefined?'':String(c)}</td>`).join('')+'</tr>').join('')
+    :`<tr><td class="dim" colspan="${head.length}">0 rows</td></tr>`;
+}
+function execSQL(){
+  const errEl=$('#sqlerr');
+  errEl.innerHTML='';
+  try{
+    const t0=performance.now();
+    const {head,rows}=runSQL($('#sqlcode').value);
+    const ms=(performance.now()-t0).toFixed(1);
+    renderResults(head,rows);
+    $('#execmeta').className='exec-meta';
+    $('#execmeta').textContent=`${rows.length} row${rows.length===1?'':'s'} · ${ms} ms · executed in your browser`;
+  }catch(err){
+    // bad query — never leave the console empty; fall back to the current table's real default data
+    const fallback=runSQL(SQL_EXAMPLES[activeChip]);
+    renderResults(fallback.head,fallback.rows);
+    $('#execmeta').className='exec-meta err';
+    $('#execmeta').textContent=`query failed · showing default ${activeChip==='exp'?'experience':activeChip} data instead`;
+    errEl.innerHTML=`<div class="sql-error">✕ ${err.message} — reverted to the default query below.</div>`;
+  }
+}
+$$('.q-chip').forEach(c=>c.addEventListener('click',()=>{setQ(c.dataset.q);execSQL();}));
+$('#runbtn').addEventListener('click',()=>{execSQL();markVisited('sql');});
+$('#sqlcode').addEventListener('keydown',e=>{
+  if((e.ctrlKey||e.metaKey)&&e.key==='Enter'){execSQL();markVisited('sql');}
+});
+setQ('exp');execSQL();
 
 /* resume modal */
 const res=$('#resume');
