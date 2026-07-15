@@ -38,7 +38,7 @@ button{font-family:inherit;cursor:pointer}
 /* topbar */
 #top{position:sticky;top:0;z-index:60;background:rgba(251,246,236,.85);backdrop-filter:blur(12px);
   border-bottom:1px solid var(--line)}
-.top-in{display:flex;align-items:center;gap:16px;height:58px}
+.top-in{display:flex;align-items:center;flex-wrap:wrap;gap:10px 16px;min-height:58px;padding:8px 0}
 .brand{font-family:'JetBrains Mono',monospace;font-size:14px;font-weight:700}
 .brand b{color:var(--blue)}
 .live{display:flex;align-items:center;gap:7px;font-family:'JetBrains Mono',monospace;
@@ -52,6 +52,7 @@ button{font-family:inherit;cursor:pointer}
 .tbtn:hover{border-color:var(--blue)}
 .tbtn.primary{background:var(--orange);color:#fff;border-color:var(--orange);font-weight:600}
 @media(max-width:640px){.live{display:none}}
+@media(max-width:420px){.tbtn{padding:7px 11px;font-size:11px}.top-actions{gap:7px}}
 
 /* hero strip */
 #hero{padding:38px 0 8px}
@@ -97,8 +98,11 @@ button{font-family:inherit;cursor:pointer}
   padding:4px;flex-wrap:wrap;gap:4px}
 .g-bar{border-radius:5px;display:inline-flex;align-items:center;padding:4px 10px;
   font-family:'JetBrains Mono',monospace;font-size:10.5px;color:#fff;font-weight:700;
-  white-space:nowrap;flex:none}
-@media(max-width:560px){.g-row{grid-template-columns:110px 1fr}}
+  white-space:nowrap;flex:none;max-width:100%}
+@media(max-width:560px){
+  .g-row{grid-template-columns:1fr;gap:5px}
+  .g-bar{white-space:normal;flex:1 1 auto;min-width:0}
+}
 
 /* donut */
 .donut-wrap{display:flex;gap:20px;align-items:center;flex-wrap:wrap}
