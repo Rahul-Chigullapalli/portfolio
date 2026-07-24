@@ -365,6 +365,8 @@ footer .mono{font-size:11px;margin-top:10px}
       <div class="bar-row"><span class="bl">ServiceNow CMDB (Governance)</span><div class="track"><div class="fill" data-w="88" style="background:var(--pink)"></div></div><span class="bv">88</span></div>
       <div class="bar-row"><span class="bl">GenAI / RAG / Agents (AI)</span><div class="track"><div class="fill" data-w="76" style="background:var(--purple)"></div></div><span class="bv">76</span></div>
       <div class="bar-row"><span class="bl">Stakeholder &amp; BA (Business)</span><div class="track"><div class="fill" data-w="85" style="background:var(--teal)"></div></div><span class="bv">85</span></div>
+      <div class="bar-row"><span class="bl">PostgreSQL · BigQuery · Redshift (DE)</span><div class="track"><div class="fill" data-w="75" style="background:var(--green)"></div></div><span class="bv">75</span></div>
+      <div class="bar-row"><span class="bl">SAP S/4HANA integration (DE)</span><div class="track"><div class="fill" data-w="70" style="background:var(--green)"></div></div><span class="bv">70</span></div>
     </div>
 
     <!-- impact -->
@@ -542,7 +544,7 @@ $$('.reveal').forEach(el=>io.observe(el));
 /* capability lens data + rendering */
 const CAPS=[
   {k:'data-engineering',label:'Data Engineering',c:'var(--green)',
-    bullets:['REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror): 1.5TB+ into Snowflake/SQL Server','ETL/ELT pipeline design: Azure Data Factory, Databricks, dbt, Python/pandas','Reconciliation &amp; deduplication logic across 20M+ configuration items']},
+    bullets:['REST API integrations across 5+ heterogeneous vendor systems (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror): 1.5TB+ into Snowflake, SQL Server, PostgreSQL, BigQuery, Redshift','Raw file parsing &amp; profiling (CSV/TSV, JSON, XML, Excel), schema mapping and standardization to catch drift before it hits downstream systems','Owns pipelines end-to-end, analysis through deployment: reconciliation &amp; dedup logic across 20M+ configuration items']},
   {k:'data-analytics',label:'Data Analytics',c:'var(--blue)',
     bullets:['SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT','A/B testing &amp; cohort analysis: +30% engagement over 18 months','IoT telemetry analysis: 300+ error patterns surfaced, 22% faster issue ID']},
   {k:'ai-agents',label:'AI &amp; Agents',c:'var(--purple)',
@@ -662,7 +664,9 @@ const DB={
   {capability:'business-analytics',tool:'Stakeholder & BA',proficiency:85},
   {capability:'data-engineering',tool:'Python automation',proficiency:84},
   {capability:'governance',tool:'Azure · Azure AD',proficiency:82},
-  {capability:'ai-agents',tool:'GenAI / RAG / Agents',proficiency:76}
+  {capability:'ai-agents',tool:'GenAI / RAG / Agents',proficiency:76},
+  {capability:'data-engineering',tool:'PostgreSQL · BigQuery · Redshift',proficiency:75},
+  {capability:'data-engineering',tool:'SAP S/4HANA integration',proficiency:70}
  ],
  projects:[
   {name:'Enterprise CMDB & asset governance',industry:'insurance',capabilities:'governance,data-engineering',proves:'REST API integrations (ServiceNow CMDB, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into analytics-ready datasets; reconciliation & dedup across 20M+ CIs',stack:'ServiceNow CMDB, Python, SQL, REST APIs'},
@@ -703,7 +707,7 @@ const DB={
   {reason:'Full-stack data: builds the pipeline (DE), the dashboard (BI), and the model behind the AI'},
   {reason:'Governance-first: the layer that makes analytics and AI outputs defensible, not just impressive'},
   {reason:'Proof over adjectives: RLS demo, metrics, and this dashboard are all working artifacts'},
-  {reason:'Bridges technical and business: stakeholder requirements to shipped analytics, not just SQL'},
+  {reason:'Bridges technical and business: works directly with customer IT teams and vendor engineers, owning integration pipelines end-to-end from analysis to deployment'},
   {reason:'Cross-domain: insurance, finance, SaaS, IoT - pattern recognition across regulated industries'},
   {reason:'Ships without frameworks: this entire dashboard is one hand-rolled HTML file'}
  ]
@@ -918,8 +922,8 @@ const KB=[
  {id:'genai',kw:['genai','gen ai','rag','chatbot','ai agent','agents','llm','artificial intelligence','bedrock','responsible ai'],
   ans:'At Wolters Kluwer he led stakeholder discovery to architect a GenAI-powered compliance chatbot, designing RAG/knowledge-retrieval logic and business rules. It now supports 80+ clients annually and cut client onboarding time 40%. He also builds AI cost/usage-monitoring dashboards and has working knowledge of Responsible AI, the NIST AI RMF, and the EU AI Act.',
   src:'Wolters Kluwer · AI Governance resume'},
- {id:'de',kw:['data engineer','data engineering','etl','elt','pipeline','snowflake','azure data factory','databricks','dbt'],
-  ans:'Data engineering side: REST API integrations (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into Snowflake/SQL Server, ETL/ELT pipeline design with Azure Data Factory, Databricks, and dbt, plus reconciliation &amp; dedup logic across 20M+ configuration items.',
+ {id:'de',kw:['data engineer','data engineering','etl','elt','pipeline','snowflake','azure data factory','databricks','dbt','postgresql','bigquery','redshift','sap','raw file','schema drift','language','ruby','c++'],
+  ans:'Data engineering side: REST API integrations across 5+ heterogeneous vendor systems (ServiceNow, Tenable, Tanium, Infoblox, SnowMirror) processing 1.5TB+ into Snowflake, SQL Server, PostgreSQL, BigQuery, and Redshift. Profiles raw CSV/JSON/XML/Excel files to catch schema drift and inconsistencies before they hit downstream systems, and owns pipelines end-to-end from analysis through deployment. Also works directly with customer IT teams and vendor engineers, and has hands-on experience integrating SAP S/4HANA. Primary languages are Python and SQL, with working knowledge of R and C/C++.',
   src:'Data Engineer resume'},
  {id:'da',kw:['data analyst','data analytics','a/b test','ab test','segmentation','statistics','forecasting'],
   ans:'On the analytics side: SQL (CTEs, window functions) + Python (pandas) analyzing 1.5TB+ of enterprise data across insurance, SaaS, and IoT, plus A/B testing that lifted engagement 30% over 18 months.',
@@ -940,7 +944,7 @@ const KB=[
  {id:'contact',kw:['contact','email','phone','reach','hire him','get in touch','linkedin','relocat'],
   ans:'Email: chigullapallirahul@gmail.com · Phone: (201) 423-5266 · LinkedIn: linkedin.com/in/rahul-chigullapalli · Based in Jersey City, NJ, open to relocation.'},
  {id:'why',kw:['why hire','why should','strengths','unique','stand out','why him'],
-  ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI, with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
+  ans:'Full-stack across the data lifecycle: he builds the pipeline (DE), the dashboard (BI), and the retrieval logic behind the AI, with governance (lineage, RLS, audit readiness) as the throughline, not an afterthought. Works directly with customer IT teams and vendor engineers, owning integration pipelines end-to-end. Cross-domain pattern recognition across insurance, finance, SaaS, and IoT, backed by working artifacts, not adjectives.',
   src:'why_hire_rahul'},
  {id:'impact',kw:['revenue','impact','results','metrics','numbers','roi'],
   ans:'Headline numbers: 20M+ configuration items governed, 1.5TB+ infrastructure data engineered, 40% cut in manual reporting effort, 35% faster reporting turnaround, 30% decision accuracy improvement, and 80+ clients supported by the GenAI chatbot he helped design.'},
